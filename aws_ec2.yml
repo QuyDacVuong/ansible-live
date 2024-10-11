@@ -1,6 +1,7 @@
 # demo.aws_ec2.yml
 plugin: amazon.aws.aws_ec2
 
-aws_ec2:
-  plugin: amazon.aws.aws_ec2
-  path_to_config: ./aws_ec2_config.yml
+strict: false
+
+regions:
+  - "us-east-1"

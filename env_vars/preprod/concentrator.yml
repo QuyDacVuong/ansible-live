@@ -1,0 +1,100 @@
+---
+concentrator_binaries:
+  - binary: pyr64.exe
+    url_path: build-results/coreserver/{{ coresever_bin_branch }}/disp64/
+    dest_path: D:\apps\c_concentrator
+  - binary: pyrssl64.exe
+    url_path: build-results/coreserver/{{ coresever_bin_branch }}/localssl/
+    dest_path: D:\apps\c_concentrator\
+
+
+concentrator_comm_alias: |
+  name=AppFactory2
+  alias=ip:{{ hostvars[inventory_hostname]['private_ip_address'] }}:{{ concentrator_tcp_port }}
+  alias=ip:*:3349
+
+concentrator_comm_extra_rules: |
+  rule=ip:auxolap:port pyrtcp0://{{ sharedzone_olap }}:{{ sharedzone_olap_port }}
+  {% for host in (groups['role_ggn_gdk'] | sort) %}
+  rule = ip:{{ hostvars[host]['private_ip_address'] }}:2348 pyrtcp0://{{ hostvars[host]['private_ip_address'] }}:2350
+  {% endfor %}
+  {% for host in (groups['role_ggn_non_gdk'] | sort) %}
+  rule = ip:{{ hostvars[host]['private_ip_address'] }}:2348 pyrtcp0://{{ hostvars[host]['private_ip_address'] }}:2350
+  {% endfor %}
+  {% for host in (groups['role_ggn_gdk'] | sort) %}
+  rule={{ host | to_factory}} pyrtcp0://{{ hostvars[host]['private_ip_address'] }}:2348
+  {% endfor %}
+  {% for host in (groups['role_ggn_non_gdk'] | sort) %}
+  rule={{ host | to_factory}} pyrtcp0://{{ hostvars[host]['private_ip_address'] }}:2348
+  {% endfor %}
+  rule=ip:*:* pyrtcp0://{{ hostvars[groups.role_ggn_lobby.0]['private_ip_address'] }}:2350
+
+concentrator_comm_extra_options: |
+  performance=1
+  performancetimer=10000
+  option.acceptnewsubscription=1
+  option.percentofdeleteditems=50
+  option.subcrexpire=60000
+  subscriptiontreshold=10
+  option.traffictimer=10000
+  trafficprintlast=1
+
+concentrator_managers: []
+
+concentrator_tcpmux: |
+  port=3349
+  gatherstatistic=1
+
+concentrator_smemmux: |
+  port=3349
+  gatherstatistic=1
+
+concentrator_sslmp_extra_options: |
+  port=26002
+  option.keepalive=5000/30000
+  option.framesize=64000
+  option.listenbacklog=200
+  option.logfile=d:\apps\logs\c_concentrator\protocol.log
+  option.optimizepacket=1
+  option.maxmessagesize=100000000
+  option.serverencryption=c0e907bb,fe0f9aa6,a0afceba,9eee26db,c4a3c762,8ee7224b,c1b460cb,15c95e26,bf496f3d,8317da41 
+  maxnumberofconnections=0
+  serverkey=d:\apps\cert\devreq
+  servercert=d:\apps\cert\devcert
+  serverkeypassword={{ key_passphrase }}
+  gatherstatistic=2
+
+concentrator_tcp: |
+  port={{ concentrator_tcp_port }}
+  option.compressbits=0
+  option.logfile=d:\apps\logs\c_concentrator\protolocal.log
+  option.keepalive=30000/180000
+  option.framesize=1000000
+  option.intcpbuffer=1000000
+  option.outtcpbuffer=1000000
+  option.protocol=5
+  gatherstatistic=2
+
+concentrator_tcpd: []
+
+concentrator_udt: []
+
+concentrator_restrictconnections: |
+  debug=5
+  ip:*:*/AuxLobbyServerInstance/CLI.auxlobby=pyrssl0:/*;routeallow
+  ip:*:*/AuxLobbyServerInstance/auxlobby=pyrssl0:/*;forward ip:$0:$1/AuxLobbyServerInstance/CLI.auxlobby
+  ip:*:*/AuxLobbyServerInstance/CPA.*=pyrtcp0:/*;forward ip:$0:$1/AuxLobbyServerInstance/CLI.$0
+  ip:*:*/AuxLobbyEtcServerInstance/CPA.*=pyrtcp0:/*;forward ip:$0:$1/AuxLobbyEtcServerInstance/CLI.$0 
+  ip:*:*/auxtable.*/CLI.client=pyrssl0:/*;routeallow
+  ip:*:*/auxtable.*/client=pyrssl0:/*;forward ip:$0:$1/auxtable.$0/CLI.client
+  ip:*:*/auxtable.*/CLI.client_cipwa=pyrtcp0:/*;routeallow
+  ip:*:*/auxtable.*/CPA.*=pyrtcp0:/*;forward ip:$0:$1/auxtable.$0/CLI.$0  
+  *=pyrssl0:/*;routedeny last
+
+concentrator_restrictsubscription: |
+  ip:*:*/tablen.?.*/*=*;forward ip:$0:$1/$F/$0
+  ip:*:*/LobbyServerInstance/tablen.?.*=*;forward ip:$0:$1/LobbyServerInstance/$F
+
+concentrator_logger: |
+  server=ip:{{ hostvars[groups.role_ggn_hercules.0]['private_ip_address'] }}:9322
+  station={{ stationname }}.CONCENTRATOR-{{ hostvars[inventory_hostname]['private_ip_address'].split('.')[-1] }}

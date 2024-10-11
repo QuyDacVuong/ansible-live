@@ -1,0 +1,8 @@
+---
+- hosts: platform_Windows:!role_ggn_hercules
+  name: Telgateway deploy
+  roles:
+    - name: casino.server.telgateway
+      role: casino.server.telgateway
+  vars_files:
+    - ../env_vars/{{env}}/common.yml

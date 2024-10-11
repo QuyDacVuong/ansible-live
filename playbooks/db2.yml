@@ -1,0 +1,9 @@
+---
+- hosts: role_ggn_db2
+  name: DB2 servers
+  gather_facts: true
+  roles:
+    - casino.server.db2
+  vars_files:
+    - ../env_vars/{{env}}/common.yml
+    - ../env_vars/{{env}}/db2.yml

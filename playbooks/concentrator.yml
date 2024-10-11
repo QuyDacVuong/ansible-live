@@ -1,0 +1,19 @@
+---
+- hosts: role_ggn_concentrator
+
+  name: Concentrator servers
+  gather_facts: true
+  roles:
+    - casino.server.common # Copies the Infracasino config & setup monitoring
+    - name: casino.server.telgateway
+      role: casino.server.telgateway
+      tags:
+        - telgateway
+    - casino.server.generate_certs
+    - name: casino.server.concentrator
+      role: casino.server.concentrator
+    - casino.server.ssm_inventory
+  vars_files:
+    - ../env_vars/{{env}}/aws.yml
+    - ../env_vars/{{env}}/common.yml
+    - ../env_vars/{{env}}/concentrator.yml

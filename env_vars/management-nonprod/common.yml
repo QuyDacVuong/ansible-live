@@ -1,0 +1,15 @@
+---
+# We should try to keep this file small, but if you really need per-environment configuration then this is the place to add it
+
+ansible_aws_ssm_bucket_name: ggn-uki-common-management-nonprod-ansible-ssm
+squad: "ggn-uki"
+external_urls:
+  - https://origin.qa1.nonprod.ggn-uki.com
+  - https://casinoapp.qa1.nonprod.ggn-uki.com
+  - https://cdn.qa1.nonprod.ggn-uki.com
+  #- https://origin.pre.nonprod.ggn-uki.com
+  #- https://casinoapp.pre.nonprod.ggn-uki.com
+  #- https://cdn.pre.nonprod.ggn-uki.com
+  #- https://origin.dev.nonprod.ggn-uki.com
+  #- https://casinoapp.dev.nonprod.ggn-uki.com
+  #- https://cdn.dev.nonprod.ggn-uki.com

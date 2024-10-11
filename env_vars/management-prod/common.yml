@@ -1,0 +1,11 @@
+---
+# We should try to keep this file small, but if you really need per-environment configuration then this is the place to add it
+
+ansible_aws_ssm_bucket_name: ggn-uki-common-management-prod-ansible-ssm
+artifactory_baseurl: "https://artifactory.pokerstars.com/artifactory"
+artifactory_releases_folder: "releasesraw"
+squad: "ggn-uki"
+external_urls:
+  - https://origin.prod.ggn-uki.com
+  - https://casinoapp.prod.ggn-uki.com
+  - https://cdn.prod.ggn-uki.com

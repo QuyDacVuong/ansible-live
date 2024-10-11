@@ -1,0 +1,3 @@
+---
+ansible_connection: community.aws.aws_ssm
+ansible_become: true

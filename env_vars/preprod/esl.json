@@ -1,0 +1,322 @@
+{
+    "secure-storage-providers": [
+        {
+            "type": "file",
+            "path": "d:/apps/credentials/db.json"
+        },
+        {
+            "type": "appconfig"
+        }
+    ],
+    "common": {
+        "services": {
+            "AUX_GameISDbm_RW":[
+                "ip:{{ hostvars[groups.role_ggn_oltp.0]['private_ip_address'] }}:2348/IntegrationDbmProxyInstance"
+            ],
+            "Zone1.AUX_GameISDbm_RW":[
+                "ip:{{ hostvars[groups.role_ggn_oltp.0]['private_ip_address'] }}:2348/IntegrationDbmProxyInstance"
+            ],
+            "ZoneS.AUX_JackpotDbm_RW":[
+                "{{ C_ZNS_OLTP }}/JackpotDbmServerProxyInstance"
+            ],
+            "AUX_RaceDbm_RW":[
+                "ip:{{ hostvars[groups.role_ggn_oltp.0]['private_ip_address'] }}:2348/RaceDbmServerProxyInstance"
+            ],
+            "AUX_NotificationDbm_RW":[
+                "ip:{{ hostvars[groups.role_ggn_oltp.0]['private_ip_address'] }}:2348/NotificationDbmServerProxyInstance"
+            ],
+            "AUX_NotificationDbm_RO":[
+                "ip:{{ hostvars[groups.role_ggn_oltp.0]['private_ip_address'] }}:2348/RoNotificationDbmServerProxyInstance"
+            ],
+            "AUX_CdlDbm_RO":[
+                "ip:{{ hostvars[groups.role_ggn_oltp.0]['private_ip_address'] }}:2348/AuxCDLProxyInstance"
+            ],
+            "AUX_AamsDbm_RW":[
+                "{{ C_ZN_ITGATEWAY }}/AuxAamsDbmProxyInstance"
+            ],
+            "AUX_AamsDbm_RO":[
+                "{{ C_ZN_ITGATEWAY }}/AuxAamsDbmROProxyServerInstance"
+            ],
+            "AUX_AamsDbm_RC": [
+                "{{ C_ZN_ITGATEWAY }}/AuxAamsRCDbmProxyInstance"
+            ],
+            "AUX_AbeDbm_RW":[
+                "ip:{{ hostvars[groups.role_ggn_oltp.0]['private_ip_address'] }}:2348/AbeDbmServerProxyInstance"
+            ],
+            "AUX_AbeDbm_RO":[
+                "ip:{{ hostvars[groups.role_ggn_oltp.0]['private_ip_address'] }}:2348/AbeRODbmServerProxyInstance"
+            ],
+            "AUX_OlapDbm_RO": [
+                "ip:{{ sharedzone_olap }}:{{ sharedzone_olap_port }}/OlapROProxyServerInstance"
+            ],
+            "AUX_OlapAdminDbm_RO": [
+                "ip:{{sharedzone_olap}}:{{ sharedzone_olap_port }}/OlapAdminRoProxyInstance"
+            ],
+            "AUX_Lobby": [
+                "{{ C_ZN_LOBBY }}/AuxLobbyServerInstance"
+            ],
+            "Zone1.AUX_Lobby": [
+                "ip:{{ hostvars[groups.role_ggn_lobby.0]['private_ip_address'] }}:2348/AuxLobbyServerInstance"
+            ],
+            "AUX_ShadowLobby": [
+                "{{ C_ZN_LOBBY }}/AuxShadowLobbyInstance"
+            ],
+            "Zone1.AUX_ShadowLobby": [
+                "ip:{{ hostvars[groups.role_ggn_lobby.0]['private_ip_address'] }}:2348/AuxShadowLobbyInstance"
+            ],
+            "AUX_AdminServer": [
+                "{{ C_ZN_LOBBY }}/AuxAdminServerInstance"
+            ],
+            "Zone1.AUX_AdminServer": [
+                "ip:{{ hostvars[groups.role_ggn_lobby.0]['private_ip_address'] }}:2348/AuxAdminServerInstance"
+            ],
+            "AUX_ISDispatcher": [
+                "{{ C_ZN_LOBBY }}/AuxIDSInstance"
+            ],
+            "Zone1.AUX_ISDispatcher": [
+                "ip:{{ hostvars[groups.role_ggn_lobby.0]['private_ip_address'] }}:2348/AuxIDSInstance"
+            ],
+            "AUX_GameIS": [
+                "{{ C_ZN_LOBBY }}/IntegrationServerInstance"
+            ],
+            "Zone1.AUX_GameIS": [
+                "ip:{{ hostvars[groups.role_ggn_lobby.0]['private_ip_address'] }}:2348/IntegrationServerInstance"
+            ],
+            "AUX_LoginIS": [
+                "{{ C_ZN_LOBBY }}/IntegrationServerLoginInstance"
+            ],
+            "Zone1.AUX_LoginIS": [
+                "ip:{{ hostvars[groups.role_ggn_lobby.0]['private_ip_address'] }}:2348/IntegrationServerLoginInstance"
+            ],
+            "AUX_PSAdaptor": [
+                "{{ C_ZN_ADAPTOR }}/PSAdaptorInstance"
+            ],
+            "Zone1.AUX_SBGAdaptor": [
+                "ip:{{ hostvars[groups.role_ggn_lobby.0]['private_ip_address'] }}:2348/AuxSBGAdaptorInstance"
+            ],
+            "AUX_WebGateway": [
+                "{{ C_ZN_LOBBY }}/AuxWebGatewayServerInstance"
+            ],
+            "AUX_AamsIS": [
+                "{{ C_ZN_LOBBY }}/AuxAamsIntegrationServerInstance"
+            ],
+            "AUX_ISA": [
+                "{{ C_ZN_LOBBY }}/AuxISAssistantInstance"
+            ],
+            "Zone1.AUX_ISA": [
+                "ip:{{ hostvars[groups.role_ggn_lobby.0]['private_ip_address'] }}:2348/AuxISAssistantInstance"
+            ],
+            "AUX_RaceServer": [
+                "{{ C_ZN_LOBBY }}/AuxRaceServerInstance"
+            ],
+            "AUX_ServiceGateway": [
+                "{{ C_ZN_LOBBY }}/AuxServicesGatewayInstance"
+            ],
+            "AUX_LobbyEtc": [
+                "{{ C_ZN_LOBBY }}/AuxLobbyEtcServerInstance"
+            ],
+            "AUX_AbeServer": [
+                "{{ C_ZN_LOBBY }}/AbeServerInstance"
+            ],
+            "ZoneS.AUX_JackpotServer": [
+                "{{C_ZNS_LOBBY}}/JackpotServerInstance"
+            ],
+            "ZoneS.AUX_JSA": [
+                "{{C_ZNS_LOBBY}}/AuxJSAssistantInstance"
+            ],
+            "AUX_Trigger": [
+                "{{ C_ZN_LOBBY }}/AuxTriggerServerInstance"
+            ],
+            "Zone1.AUX_Trigger": [
+                "ip:{{ hostvars[groups.role_ggn_lobby.0]['private_ip_address'] }}:2348/AuxTriggerServerInstance"
+            ],
+            "AUX_DemoPSBackOffice": [
+                "{{ C_ZN_ADAPTOR }}/DemoPSAdaptorInstance"
+            ],
+            "Zone1.AUX_PPBAdaptor": [
+                "ip:{{ hostvars[groups.role_ggn_lobby.0]['private_ip_address'] }}:2348/AuxPPBAdaptorInstance"
+            ],
+            "AUX_RaceScheduler": [
+                "ip:{{ hostvars[groups.role_ggn_oltp.0]['private_ip_address'] }}:2348/AuxRaceShedulerInstance"
+            ],
+            "AUX_MainDbm_RW": [
+                "ip:{{ hostvars[groups.role_ggn_oltp.0]['private_ip_address'] }}:2348/AuxDbmServerInstance"
+            ],
+            "Zone1.AUX_MainDbm_RW": [
+                "ip:{{ hostvars[groups.role_ggn_oltp.0]['private_ip_address'] }}:2348/AuxDbmServerInstance"
+            ],
+            "ZoneS.AUX_MainDbm_RW": [
+                "{{ C_ZNS_OLTP }}/AuxDbmServerInstance"
+            ],
+            "AUX_MainDbm_RO": [
+                "ip:{{ hostvars[groups.role_ggn_oltp.0]['private_ip_address'] }}:2348/AuxROOltpDbmServerInstance"
+            ],
+            "Zone1.AUX_MainDbm_RO": [
+                "ip:{{ hostvars[groups.role_ggn_oltp.0]['private_ip_address'] }}:2348/AuxROOltpDbmServerInstance"
+            ],
+            "ZoneS.AUX_MainDbm_RO": [
+                "{{ C_ZNS_OLTP }}/AuxROOltpDbmServerInstance"
+            ],
+            "AUX_TableDbm_RW": [
+                "ip:{{ hostvars[groups.role_ggn_oltp.0]['private_ip_address'] }}:2348/AuxTableDbmServerInstance"
+            ],
+            "Zone1.AUX_TableDbm_RW": [
+                "ip:{{ hostvars[groups.role_ggn_oltp.0]['private_ip_address'] }}:2348/AuxTableDbmServerInstance"
+            ],
+            "AUX_AamsTableDbm_RW": [
+                "ip:{{ hostvars[groups.role_ggn_oltp.0]['private_ip_address'] }}:2348/AuxTableDbmITServerInstance"
+            ],
+            "AUX_HHICE_TableDbm_RW": [
+                "ip:{{ hostvars[groups.role_ggn_oltp.0]['private_ip_address'] }}:2348/AuxTableDbmHHICEServerProxyInstance"
+            ],
+            "Zone1.AUX_HHICE_TableDbm_RW": [
+                "ip:{{ hostvars[groups.role_ggn_oltp.0]['private_ip_address'] }}:2348/AuxTableDbmHHICEServerInstance"
+            ],
+            "AUX_HHICE_AamsTableDbm_RW": [
+                "ip:{{ hostvars[groups.role_ggn_oltp.0]['private_ip_address'] }}:2348/AuxTableDbmITHHICEServerProxyInstance"
+            ],
+            "AUX_OlapSaver": [
+                "ip:{{ hostvars[groups.role_ggn_oltp.0]['private_ip_address'] }}:2348/AuxOlapSaverInstance"
+            ],
+            "AUX_LoginISDbm_RW": [
+                "ip:{{ hostvars[groups.role_ggn_oltp.0]['private_ip_address'] }}:2348/IntegrationDbmLoginInstance"
+            ],
+            "AUX_LoginISDbm_RO": [
+                "ip:{{ hostvars[groups.role_ggn_oltp.0]['private_ip_address'] }}:2348/IntegrationRODbmLoginInstance"
+            ],
+            "Zone1.AUX_LoginISDbm_RW": [
+                "ip:{{ hostvars[groups.role_ggn_oltp.0]['private_ip_address'] }}:2348/IntegrationDbmLoginInstance"
+            ],
+            "Zone1.AUX_LoginISDbm_RO": [
+                "ip:{{ hostvars[groups.role_ggn_oltp.0]['private_ip_address'] }}:2348/IntegrationRODbmLoginInstance"
+            ],
+            "AUX_StatsDbm_RW": [
+                "ip:{{ hostvars[groups.role_ggn_oltp.0]['private_ip_address'] }}:2348/AuxStatsDbmInstance"
+            ],
+            "AUX_StatsServer": [
+                "ip:{{ hostvars[groups.role_ggn_oltp.0]['private_ip_address'] }}:2348/AuxStatsServerInstance"
+            ],
+            "ZoneS.AUX_JackpotDbm_RO": [
+                "{{ C_ZNS_OLTP }}/JackpotRODbmServerInstance"
+            ],
+            "AUX_DeliveryServer": [
+                "ip:{{ hostvars[groups.role_ggn_oltp.0]['private_ip_address'] }}:2348/AuxDeliveryServerInstance"
+            ],
+            "ZoneS.AUX_IdDbm_RW": [
+                "{{ C_ZNS_OLTP }}/AuxIdDbmInstance"
+            ],
+            "Zone1.AUX_IdDbm_RW": [
+                "ip:{{ hostvars[groups.role_ggn_oltp.0]['private_ip_address'] }}:2348/AuxIdDbmInstance"
+            ],
+            "AUX_NotificationServer": [
+                "ip:{{ hostvars[groups.role_ggn_oltp.0]['private_ip_address'] }}:2348/AuxNotificationServerInstance"
+            ],
+            "Zone1.AUX_NotificationServer": [
+                "ip:{{ hostvars[groups.role_ggn_oltp.0]['private_ip_address'] }}:2348/AuxNotificationServerInstance"
+            ],
+            "AUX_RgMessageRouter": [
+                "{{ C_ZN_RGS }}/AuxRgMessageRouterInstance"
+            ],
+            "Zone1.AUX_RgMessageRouter": [
+                "ip:{{ hostvars[groups.role_ggn_lobby.0]['private_ip_address'] }}:2348/AuxRgMessageRouterInstance"
+            ],
+            "AUX_AamsGateway": [
+                "{{ C_ZN_ITGATEWAY }}/AuxAamsGatewayServerInstance"
+            ],
+            "AUX_OlapMD": [
+                "ip:{{sharedzone_olap}}:5348/OlapMDInstance"
+
+            ],
+            "AUX_OlapDbm_RW_Proxy": [
+                "ip:{{sharedzone_olap}}:5348/OlapProxyServerInstance"
+            ],
+            "AUX_OlapServerDbm_RW": [
+                "ip:{{sharedzone_olap}}:5348/AuxOlapServerInstance",
+                "ip:{{sharedzone_olap}}:5348/AuxOlapServer2Instance",
+                "ip:{{sharedzone_olap}}:5348/AuxOlapServer3Instance"
+            ],
+            "AUX_OlapGameSessionDbm_RW": [
+                "ip:{{sharedzone_olap}}:5348/AuxOlapGameSession1DbmInstance",
+                "ip:{{sharedzone_olap}}:5348/AuxOlapGameSession2DbmInstance"
+            ],
+            "AUX_OlapWMDbm_RO_Proxy": [
+                "ip:{{sharedzone_olap}}:5348/AuxWMProxyInstance"
+            ],
+            "AUX_WMOlapServerDbm_RO": [
+                "ip:{{sharedzone_olap}}:5348/AuxWMOlapServerInstance",
+                "ip:{{sharedzone_olap}}:5348/AuxWMOlapServer1Instance"
+            ],
+            "AUX_TableMonitorServer": [
+                "{{ C_ZN_STATS }}/AuxTableMonitorServerInstance"
+            ],
+            "Zone1.AUX_TableMonitorServer": [
+                "ip:{{ hostvars[groups.role_ggn_lobby.0]['private_ip_address'] }}:2348/AuxTableMonitorServerInstance"
+            ],
+            "AUX_LobbyStats": [
+                "{{ C_ZN_STATS }}/AuxLobbyStatsInstance"
+            ],
+            "AUX_HHS": [
+                "{{ C_ZN_STATS }}/handHistoryInstance"
+            ],
+            "Zone1.AUX_HHS": [
+                "ip:{{ hostvars[groups.role_ggn_lobby.0]['private_ip_address'] }}:2348/handHistoryInstance"
+            ],
+            "AUX_GameMonitorServer": [
+                "{{ C_ZN_STATS }}/AuxGameMonitorServerInstance"
+            ],
+            "AUX_MomentsTicker": [
+                "{{ C_ZN_STATS }}/MomentsTickerServerInstance"
+            ],
+            "Zone1.AUX_MomentsTicker": [
+                "ip:{{ hostvars[groups.role_ggn_lobby.0]['private_ip_address'] }}:2348/MomentsTickerServerInstance"
+            ],
+            "AUX_EmailServer": [
+                "{{ C_ZN_STATS }}/AuxEmailServerInstance"
+            ],
+            "Zone1.AUX_EmailServer": [
+                "ip:{{ hostvars[groups.role_ggn_oltp.0]['private_ip_address'] }}:2348/AuxEmailServerInstance"
+            ],
+            "AUX_Vttm": [
+                "{{ C_ZN_GDK2 }}/VTTMServerInstance"
+            ],
+            "PK_Entropy_Default": [
+                "{{ C_ZN_LOBBY }}/AuxEntropyServerInstance"
+            ],
+            "Zone1.PK_Entropy_Default": [
+                "ip:{{ hostvars[groups.role_ggn_lobby.0]['private_ip_address'] }}:2348/AuxEntropyServerInstance"
+            ],
+	        "PL_LoginDbm_RW": [
+                "{{ LOGINDBM }}/DbmLoginInstance"
+            ],
+            "PL_LoginRouter": [
+                "{{ LOGINDBM }}/LoginRouterInstance"
+            ],
+            "PS_AuxHub": [
+                "{{ PYRHUB }}/AuxHubInstance"
+            ],
+            "MRK_TemplateMain": [
+                "{{ TEMPLATESERVER }}/TemplateServerInstance"
+            ],
+            "MRK_CrmServer": [
+                "ip:{{sharedzone_crm}}:2348/CrmInstance"
+            ]
+        },
+        "database-services": {
+            "ZoneS.ROOTAX_RO": "Driver={IBM DB2 ODBC DRIVER};DSN=RZNSCMQA;Uid=${db2-ro-uid};Pwd=${db2-ro-pwd};CurrentSchema=DB2ADMIN;",
+            "ZoneS.ROOTAX_RW": "Driver={IBM DB2 ODBC DRIVER};DSN=RZNSCMQA;Uid=${db2-rw-uid};Pwd=${db2-rw-pwd};CurrentSchema=DB2ADMIN;",
+            "ZoneS.ROOTAX_CDL_RO": "Driver={IBM DB2 ODBC DRIVER};DSN=RZNSCMQA;Uid=${db2-ro-c-uid};Pwd=${db2-ro-c-pwd};CurrentSchema=DB2ADMIN;",
+            "ZoneS.OLAPAX_RO": "Driver={IBM DB2 ODBC DRIVER};DSN=OLAPCMQA;Uid=${db2-ro-uid};Pwd=${db2-ro-pwd};CurrentSchema=DB2ADMIN;",
+            "ZoneS.OLAPAX_RW": "Driver={IBM DB2 ODBC DRIVER};DSN=OLAPCMQA;Uid=${db2-rw-uid};Pwd=${db2-rw-pwd};CurrentSchema=DB2ADMIN;",
+            "Zone1.ROOTAX_RO": "Driver={IBM DB2 ODBC DRIVER};DSN={{ db_config['dbs']['zone1-oltp']['dbname'] }};Uid=${db2-ro-uid};Pwd=${db2-ro-pwd};CurrentSchema=DB2ADMIN;",
+            "Zone1.ROOTAX_RW": "Driver={IBM DB2 ODBC DRIVER};DSN={{ db_config['dbs']['zone1-oltp']['dbname'] }};Uid=${db2-rw-uid};Pwd=${db2-rw-pwd};CurrentSchema=DB2ADMIN;",
+            "Zone1.ROOTAX_CDL_RO": "Driver={IBM DB2 ODBC DRIVER};DSN={{ db_config['dbs']['zone1-oltp']['dbname'] }};Uid=${db2-ro-c-uid};Pwd=${db2-ro-c-pwd};CurrentSchema=DB2ADMIN;",
+            "ROOTAX_RO": "Driver={IBM DB2 ODBC DRIVER};DSN=ROOTCMQA;Uid=${db2-ro-uid};Pwd=${db2-ro-pwd};CurrentSchema=DB2ADMIN;",
+            "ROOTAX_RW": "Driver={IBM DB2 ODBC DRIVER};DSN=ROOTCMQA;Uid=${db2-rw-uid};Pwd=${db2-rw-pwd};CurrentSchema=DB2ADMIN;",
+            "ROOTAX_CDL_RO": "Driver={IBM DB2 ODBC DRIVER};DSN=ROOTCMQA;Uid=${db2-ro-c-uid};Pwd=${db2-ro-c-pwd};CurrentSchema=DB2ADMIN;",
+            "OLAPAX_RO": "Driver={IBM DB2 ODBC DRIVER};DSN=OLAPCMQA;Uid=${db2-ro-uid};Pwd=${db2-ro-pwd};CurrentSchema=DB2ADMIN;",
+            "OLAPAX_RW": "Driver={IBM DB2 ODBC DRIVER};DSN=OLAPCMQA;Uid=${db2-rw-uid};Pwd=${db2-rw-pwd};CurrentSchema=DB2ADMIN;",
+            "PYRAMS_RO": "Driver={IBM DB2 ODBC DRIVER};DSN=ITGWAYQA;Uid=${db2-ro-uid};Pwd=${db2-ro-pwd};CurrentSchema=DB2ADMIN;",
+            "PYRAMS_RW": "Driver={IBM DB2 ODBC DRIVER};DSN=ITGWAYQA;Uid=${db2-rw-uid};Pwd=${db2-rw-pwd};CurrentSchema=DB2ADMIN;"
+        }
+    }
+}

@@ -1,0 +1,14 @@
+---
+- hosts: role_ggn_sbg_integration_gw
+  name: Integration servers
+  roles:
+    - casino.server.chrony
+    - casino.server.common
+    - name: casino.server.sbgintegration
+      vars:
+        advertise_host: "{{ hostvars[inventory_hostname]['private_ip_address'] }}"
+        SBGPassword: "{{ lookup('amazon.aws.ssm_parameter', '/{{ env }}/common/sbg-integration-password') }}"
+    - casino.server.ssm_inventory
+  vars_files:
+    - ../env_vars/{{ env }}/common.yml
+    - ../env_vars/{{ env }}/sbgintegration.yml

@@ -1,0 +1,114 @@
+gdk_table_server_binaries:
+  - binary: pyr64.exe
+    url_path: build-results/coreserver/{{ coresever_bin_branch }}/disp64/
+    dest_path: D:\apps\c_gdk\
+  - binary: auxictableservermulti64.exe
+    url_path: build-results/casinoserver/{{ casinosever_bin_branch }}/auxictableservermulti/
+    dest_path: D:\apps\bin\c_gdk\
+  - binary: auxptldstableserverproxy.exe
+    url_path: build-results/casinoserver/{{ casinosever_bin_branch }}/auxptldstableserverproxy/
+    dest_path: D:\apps\bin\c_gdk\
+  - binary: auxrgstableproxy.exe
+    url_path: build-results/casinoserver/{{ casinosever_bin_branch }}/auxrgstableproxy/
+    dest_path: D:\apps\bin\c_gdk\
+  - binary: auxtableservermulti.exe
+    url_path: build-results/casinoserver/{{ casinosever_bin_branch }}/auxtableservermulti/
+    dest_path: D:\apps\bin\c_gdk\
+
+
+gdk_table_comm: |
+  name=AppFactory
+  identification={{ stationname}}.GDK-{{ hostvars[inventory_hostname]['private_ip_address'].split('.')[-1] }}
+  alias=ip:{{ hostvars[inventory_hostname]['private_ip_address'] }}:2348
+  alias=ip:{{ hostvars[inventory_hostname]['private_ip_address'] }}:2350
+  alias=ip:*:2349
+  alias=ip:*:443
+  alias=ip:*:443/*
+  alias=ip:*:26002
+  alias=ip:*:26003
+  alias={{ inventory_hostname | to_factory }}
+
+  {% for host in (groups[gdk_role] | sort ) %}
+  {% if host != inventory_hostname %}
+  rule={{ host | to_factory }} pyrtcp0://{{ hostvars[host]['private_ip_address'] }}:2348
+  {% endif %}
+  {% endfor %}
+
+  {% for host in (groups[non_gdk_role] | sort ) %}
+  rule={{ host | to_factory }} pyrtcp0://{{ hostvars[host]['private_ip_address'] }}:2348
+  {% endfor %}
+
+  rule=ip:127.0.0.1:5447 pyrtcp0://127.0.0.1:5447
+  rule=ip:*:* pyrtcp0://$0:$1
+  performance=1
+  performancetimer=10000
+  appfactoryfile=d:\apps\logs\c_gdk\listofobjects.log
+  trafficprintlast=0
+
+gdk_table_config: |
+  multiexeport=2349
+  smemmultiexeport=2349
+
+gdk_table_managers: |
+  manager=tcp
+  manager=tcpd
+  manager=tcpmux
+  manager=smemmux
+  manager=ssl_out
+
+gdk_table_tcp: |
+  type=tcp
+  port=2348
+  maxconnectionsperthread=3
+  option.islocal=1
+  option.protocol=3
+  option.framesize=64000
+  option.compressbits=0
+  option.logfile=d:\apps\logs\c_gdk\protolocal.log
+  option.keepalive=30000/180000
+  gatherstatistic=2
+
+gdk_table_tcpd: |
+  type=tcp
+  port=2350
+  maxconnectionsperthread=3
+  option.framesize=1000000
+  option.intcpbuffer=1000000
+  option.outtcpbuffer=1000000
+  option.protocol=5
+  option.islocal=1
+  option.logfile=d:\apps\logs\c_gdk\protolocald.log
+  option.keepalive=30000/180000
+  gatherstatistic=2
+
+gdk_table_tcpmux: |
+  type=tcpmux
+  port=2349
+  gatherstatistic=1
+
+gdk_table_smemmux: |
+  type=smemmux
+  port=2349
+  gatherstatistic=1
+
+gdk_table_ssl_out: |
+  type=ssl
+  option.logfile=d:\apps\logs\c_lobby\protolocalssl.log
+  clienttrustedcert=d:\apps\credentials\ca_disp.crt
+
+gdk_table_multiexe: |
+  AuxTableServerMulti=d:\apps\bin\c_gdk\auxtableservermulti.exe;d:\apps\logs\c_gdk;0/0;R240
+  AuxRgProxyServerMulti=d:\apps\bin\c_gdk\auxrgstableproxy.exe;d:\apps\logs\c_gdk;0/0;R240
+  AuxIcProxyServerMulti=d:\apps\bin\c_gdk\auxictableservermulti64.exe;d:\apps\logs\c_gdk;0/0;R240
+  AuxPtLdProxyServerMulti=d:\apps\bin\c_gdk\auxptldstableserverproxy.exe;d:\apps\logs\c_gdk;0/0;R240
+
+gdk_table_exe: |
+  AuxTableServer=d:\apps\bin\c_gdk\auxtableservermulti.exe;d:\apps\logs\c_gdk
+  AuxRgProxyServer=d:\apps\bin\c_gdk\auxrgstableproxy.exe;d:\apps\logs\c_gdk
+  AuxIcProxyServer=d:\apps\bin\c_gdk\auxictableservermulti64.exe;d:\apps\logs\c_gdk
+  AuxPtLdProxyServer=d:\apps\bin\c_gdk\auxptldstableserverproxy.exe;d:\apps\logs\c_gdk
+
+gdk_table_logger: |
+  server=ip:{{ hercules_host }}:9322
+  station={{ stationname }}.GDKTABLESERVER-{{ hostvars[inventory_hostname]['private_ip_address'].split('.')[-1] }}
+  reportseh=1

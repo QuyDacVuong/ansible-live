@@ -1,0 +1,21 @@
+---
+
+# Add further variables which apply to all servers to this file...
+ansible_aws_ssm_region: eu-west-1
+
+common_esl_source: "{{ playbook_dir }}/../env_vars/{{ env }}/esl.json"
+akamai_product_prefix: "ggn"
+
+db2_role: 'role_ggn_db2'
+gdk_role: 'role_ggn_gdk'
+hercules_role: 'role_ggn_hercules'
+lobby_role: 'role_ggn_lobby'
+non_gdk_role: 'role_ggn_non_gdk'
+
+concentrator_host: "{{ hostvars[groups.role_ggn_concentrator.0]['private_ip_address'] }}"
+concentrator_hosts: "{{ groups['role_ggn_concentrator'] | map('extract', hostvars, ['private_ip_address']) | list | sort }}"
+hercules_host: "{{ hostvars[groups.role_ggn_hercules.0]['private_ip_address'] }}"
+lobby_host: "{{ hostvars[groups.role_ggn_lobby.0]['private_ip_address'] }}"
+oltp_host: "{{ hostvars[groups.role_ggn_oltp.0]['private_ip_address'] }}"
+web_dispatcher_host: "{{ concentrator_host }}"  # the old name for concentrators may still be used somewhere
+zone: "zone1"

@@ -1,0 +1,10 @@
+---
+- hosts: role_ggn_hercules
+  name: Hercules servers
+  roles:
+    - casino.server.common
+    - casino.server.hercules
+    - casino.server.ssm_inventory
+  vars_files:
+    - ../env_vars/{{env}}/common.yml
+    - ../env_vars/{{env}}/hercules.yml

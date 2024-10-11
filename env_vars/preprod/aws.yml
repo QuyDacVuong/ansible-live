@@ -1,0 +1,52 @@
+---
+aws_tags:
+  - Key: AccountOwner
+    Value: "Steve Rho"
+  - Key: AccountOwnerEmail
+    Value: "stevero@flutterint.com"
+  - Key: BusinessService
+    Value: "Flutter Studios GGN Service"
+  - Key: CostCenter
+    Value: "Casino"
+  - Key: Costcode
+    Value: "PRJ-2578"
+  - Key: CreatedBy
+    Value: "Ansible"
+  - Key: DataClassification
+    Value: "Internal"
+  - Key: CasinoEnvironment
+    Value: preprod
+  - Key: Environment
+    Value: QA
+  - Key: External
+    Value: "True"
+  - Key: JiraRequest
+    Value: "https://jira.pyrsoftware.ca/jira/browse/CCOE-1266"
+  - Key: map-migrated
+    Value: d-server-02fw6qboe12u4l
+  - Key: OperationsEmail
+    Value: "global-casinodevops@pokerstarsint.com"
+  - Key: Organisation
+    Value: "Flutter"
+  - Key: PCI
+    Value: "False"
+  - Key: Project
+    Value: "infra"
+  - Key: SlackForSOC
+    Value: "casino-aws-migration"
+  - Key: SpendType
+    Value: "Opex"
+  - Key: Squad
+    Value: "Casino - DevOps"
+  - Key: TechnicalOwnerName
+    Value: "Steve Rho"
+  - Key: TechnicalOwnerEmailAddress
+    Value: "stevero@flutterint.com"
+  - Key: TechnicalService
+    Value: "GGN Zone - 1"
+  - Key: Tribe
+    Value: "Casino"
+  - Key: Vertical
+    Value: "Casino"
+  - Key: Zone
+    Value: Zone1

@@ -1,0 +1,18 @@
+---
+- hosts: role_ggn_gdk
+
+  name: GDK Table Server
+  gather_facts: true
+  roles:
+    - casino.server.common
+    - name: casino.server.telgateway
+      role: casino.server.telgateway
+      tags:
+        - telgateway
+    - name: casino.server.gdk_table_server
+      role: casino.server.gdk_table_server
+    - casino.server.ssm_inventory
+  vars_files:
+    - ../env_vars/{{env}}/aws.yml
+    - ../env_vars/{{env}}/common.yml
+    - ../env_vars/{{env}}/gdk_table_server.yml

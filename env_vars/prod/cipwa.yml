@@ -1,0 +1,60 @@
+---
+ggn_application_logs_path: /bigdisk0/tomcat/cipwa/logs
+cipwa_version: 1.2404.16
+second_concentrator_host: "{{ hostvars[groups.role_ggn_concentrator.1]['private_ip_address'] }}"
+cipwa_allowed_origins:
+  - "https://casinoapp.{{ public_domain }}"
+  - "https://casinoapp.skyvegas.com"
+  - "https://origin.{{ public_domain }}"
+  - "https://games.paddypower.com"
+  - "https://casino.betfair.com"
+
+cipwa_same_origin: |
+  http://localhost:8080,http://127.0.0.1:8080,http://127.0.0.1:49651,http://127.0.0.1:50332,http://127.0.0.1:52703,http://127.0.0.1:53444,http://127.0.0.1:56765,http://127.0.0.1:59846,http://127.0.0.1:60427,http://127.0.0.1:61908,http://127.0.0.1:64339
+
+
+cipwa_tomcat_version: 8.5.99
+
+log_level_warn: "warn"
+log_level_info: "info"
+zip_logs: ""
+
+certificate_domain: "cipwa-{{env}}.csr.pstars-eu-west-1-intermediate"
+cipwa_staticconnect_extra_options: "AllowLobbyP2pEndPoints=0"
+cipwa_max_messages_per_minute: "30"
+cipwa_max_connections_per_websocket: "20"
+cipwa_max_resolver_messages_per_minute: "100"
+cipwa_max_websocket_sessions_from_same_ip: "100"
+cipwa_max_failed_connection_requests_per_ip: "100"
+cipwa_zone: "0"
+cipwa_staticsettings_extra_options: "TableDispatchByInstanceIdSetting=false"
+
+cipwa_servers:
+  - AuxLobby
+  - AuxLobbyPubl
+  - AuxShadowLobbyPubl
+  - AuxTable
+  - AuxRace
+
+cipwa_publications: |
+  Publication_4=Jackpot|inJackpotList
+  Publication_419=VtTickers.PM
+  Publication_420=VtTickers.RM
+  Publication_500=Races
+  Publication_510=GDKGameNotif|inGroupNameList
+
+cipwa_monitorgroup: ""
+
+cipwa_rules_list: |
+  ip:{{ hercules_host }}:9322=ip:{{ hercules_host }}:9322
+  *:*={{ concentrator_host }}:7348,{{ second_concentrator_host }}:7348
+
+cipwa_extra_options: |
+  [Filter.inJackpotList]
+  picker=/0/
+  match={"0/jpKey":{"$in":"=jackpotIds"}}
+
+  ; PYR-134592 - gdk group pub
+  [Filter.inGroupNameList]
+  picker=/0/
+  match={"0/gn":{"$in":"=groupNames"}}

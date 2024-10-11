@@ -1,0 +1,339 @@
+---
+game_server_deploy_baseurl: "{{ artifactory_baseurl }}/{{ artifactory_releases_folder }}/GDK_{{ item.game_name }}_4AUX/GDK_{{ item.game_name }}_4AUX-{{ item.game_version }}.zip"
+
+
+gdk_game_server:
+  - game_name: DiamondStars
+    game_version: 1.3.717
+  - game_name: DiamondStars_NoJP
+    game_version: 1.3.1138
+  - game_name: EasterMoney
+    game_version: 1.3.746
+  - game_name: LionStorm
+    game_version: 1.3.654
+  - game_name: PacificBoomPP
+    game_version: 1.3.876
+  - game_name: LionStorm_RTP
+    game_version: 1.3.1246
+  - game_name: IG_StarsWheel
+    game_version: 1.3.714
+  - game_name: BigWhale
+    game_version: 1.4.485
+  - game_name: MountRiches
+    game_version: 1.4.486
+  - game_name: FlipNSpin
+    game_version: 1.4.612
+  - game_name: AztecExplorer
+    game_version: 1.3.541
+  - game_name: FrogOfFortune
+    game_version: 1.3.467
+  - game_name: Scratch4Stars
+    game_version: 1.3.209
+  - game_name: GrabbaDabbaDough
+    game_version: 1.3.291
+  - game_name: EgyptianQueen
+    game_version: 1.3.385
+  - game_name: Scratch4Gold
+    game_version: 1.3.210
+  - game_name: Scratch4Emeralds
+    game_version: 1.3.212
+  - game_name: Scratch4Diamonds
+    game_version: 1.3.196
+  - game_name: WildCorral
+    game_version: 1.3.754
+  - game_name: FlaminElle
+    game_version: 1.3.297
+  - game_name: BalthazarsWildCarnivalPP
+    game_version: 1.3.831
+  - game_name: ReelEmpirePP
+    game_version: 1.3.429
+  - game_name: GodessyGoldMM
+    game_version: 1.3.953
+  - game_name: FootballHeroPP
+    game_version: 1.3.523
+  - game_name: CatchABigUnMM
+    game_version: 1.3.423
+  - game_name: CandyGrabPP
+    game_version: 1.3.770
+  - game_name: ChameleonairePP
+    game_version: 1.3.544
+  - game_name: RedHotChilliSteppaPP
+    game_version: 1.3.744
+  - game_name: Kraliens
+    game_version: 1.3.594
+  - game_name: PlayaBanca
+    game_version: 1.3.430
+  - game_name: PacificBoom2PP
+    game_version: 1.3.519
+  - game_name: BlazingBandito
+    game_version: 1.3.462
+  - game_name: RosellasMagicalMultipliers
+    game_version: 1.3.533
+  - game_name: ExplodingLemmings
+    game_version: 1.3.697
+  - game_name: Furnace
+    game_version: 1.3.845
+  - game_name: ReelinHotHotHot
+    game_version: 1.3.597
+  - game_name: Victory
+    game_version: 1.3.615
+  - game_name: ScoffersMM
+    game_version: 1.3.749
+  - game_name: CatapultCash
+    game_version: 1.3.892
+  - game_name: BookOfWonga
+    game_version: 1.3.757
+  - game_name: RoyalCashgot
+    game_version: 1.3.484
+  - game_name: BuriedTemple
+    game_version: 1.3.649
+  - game_name: MedusaGems
+    game_version: 1.3.761
+  - game_name: JeanniesMagicLamp
+    game_version: 1.3.672
+  - game_name: HiLoRoller
+    game_version: 1.3.941
+  - game_name: StarsClassic_RTP
+    game_version: 1.3.1221
+  - game_name: StarsLineup
+    game_version: 1.3.504
+  - game_name: StarsQueens
+    game_version: 1.3.652
+  - game_name: WildDrawSaloon
+    game_version: 1.3.653
+  - game_name: StarsLineupES
+    game_version: 1.3.336
+  - game_name: BuffaloChief
+    game_version: 1.3.655
+  - game_name: FightersFury
+    game_version: 1.3.656
+  - game_name: StarsGenie
+    game_version: 1.3.657
+  - game_name: FireBull
+    game_version: 1.3.658
+  - game_name: ThunderBear
+    game_version: 1.3.480
+  - game_name: TombOfRa
+    game_version: 1.3.468
+  - game_name: FortuneFair
+    game_version: 1.3.661
+  - game_name: StarsInvaders
+    game_version: 1.3.662
+  - game_name: StickyFruits
+    game_version: 1.3.472
+  - game_name: ThreeWitches
+    game_version: 1.3.664
+  - game_name: StarsWheel
+    game_version: 1.4.437
+  - game_name: StarsLineup_NoJP
+    game_version: 1.3.853
+  - game_name: RoyalRush
+    game_version: 1.3.475
+  - game_name: StarsGenie_NoJP
+    game_version: 1.3.667
+  - game_name: BuffaloChief_NoJP
+    game_version: 1.3.669
+  - game_name: StickyFruitsScratch
+    game_version: 1.3.722
+  - game_name: AztecExplorerClassic
+    game_version: 1.3.542
+  - game_name: AgeOfValhalla
+    game_version: 1.3.606
+  - game_name: AgeOfValhallaClassic
+    game_version: 1.3.607
+  - game_name: StickyFruits_Classic
+    game_version: 1.3.438
+  - game_name: StarsLineup_NoJP
+    game_version: 1.3.476
+  - game_name: StarsInvaders_NoJP
+    game_version: 1.3.668
+  - game_name: VictoryTribes
+    game_version: 1.4.76
+  - game_name: MerlinsMysteries
+    game_version: 1.3.615
+  - game_name: JuiceShop
+    game_version: 1.3.511
+  - game_name: WildDrawSaloonClassic
+    game_version: 1.3.581
+  - game_name: FortuneFairClassic
+    game_version: 1.3.859
+  - game_name: AgeOfValhallaRush
+    game_version: 1.3.705
+  - game_name: MerlinsMysteryRush
+    game_version: 1.3.888
+  - game_name: ImmortalRichesBountyOfBlood
+    game_version: 1.3.706
+  - game_name: PharaohsLoot2
+    game_version: 1.3.982
+  - game_name: ImmortalRichesBountyOfBloodClassic
+    game_version: 1.3.833
+  - game_name: StarsGenieClassic_RTP
+    game_version: 1.3.1214
+  - game_name: AnitaFortuna
+    game_version: 1.3.934
+  - game_name: AnitaFortunaClassic
+    game_version: 1.3.1198
+  - game_name: IG_PharaohsLoot
+    game_version: 1.3.1190
+  - game_name: EpicHugeSlot
+    game_version: 1.3.1126
+  - game_name: 800PoundGorilla
+    game_version: 1.3.1230
+  - game_name: PharaohsLoot
+    game_version: 1.3.8247
+  - game_name: LuckOTheStars
+    game_version: 1.3.8248
+  - game_name: ArcticFishing
+    game_version: 1.3.1057
+  - game_name: GoldenLeprechaun
+    game_version: 1.3.123
+  - game_name: GoldenLeprechaunBookofLuck
+    game_version: 1.3.737
+  - game_name: GoldenLeprechaunOnTour
+    game_version: 1.3.205
+  - game_name: GoldenLeprechaunMystery
+    game_version: 1.3.228
+  - game_name: BigFishing
+    game_version: 1.3.880
+  - game_name: TheHeist
+    game_version: 1.3.525
+  - game_name: WildArcade
+    game_version: 1.3.679
+  - game_name: WormKing
+    game_version: 1.3.348
+  - game_name: FruitStackDeluxe
+    game_version: 1.3.133
+  - game_name: PiratesHoldDavyLockersCoins
+    game_version: 1.3.427
+  - game_name: OilTycoon
+    game_version: 1.3.742
+  - game_name: GoldenLeprechaunWheelUnderConstruction
+    game_version: 1.3.895
+  - game_name: RosellasLuckyFortune
+    game_version: 1.3.821
+  - game_name: BalthazarsWildEmporium
+    game_version: 1.3.727
+  - game_name: FootballFrenzy
+    game_version: 1.3.287
+  - game_name: CobraCash
+    game_version: 1.3.273
+  - game_name: CaribbeanWild
+    game_version: 1.3.289
+  - game_name: Scratch4Rubies
+    game_version: 1.3.211
+  - game_name: Cashzuma
+    game_version: 1.3.788
+  - game_name: ElephantGold
+    game_version: 1.3.781
+  - game_name: ReelsOfFire
+    game_version: 1.3.424
+  - game_name: Eruption
+    game_version: 1.3.471
+  - game_name: RosellasMysticalSpins
+    game_version: 1.3.380
+  - game_name: WitchDoctorWild
+    game_version: 1.3.539
+  - game_name: WilbursWildWonderland
+    game_version: 1.3.344
+  - game_name: CrazyVeg
+    game_version: 1.3.789
+  - game_name: VikingHoard
+    game_version: 1.3.712
+  - game_name: MusketeersHeroicSpinsPP
+    game_version: 1.3.452
+  - game_name: WitchDoctorGoesWild
+    game_version: 1.3.822
+  - game_name: AmazonRayneAndTheWheelofWealth
+    game_version: 1.3.466
+  - game_name: CatchABigUnMM
+    game_version: 1.3.423
+  - game_name: PapaPaolosPizzeriaMM
+    game_version: 1.3.399
+  - game_name: PremiumBlackjackVegas
+    game_version: 1.3.1054
+  - game_name: PremiumEuropeanRoulette
+    game_version: 1.3.1006
+  - game_name: PremiumBlackjackCashOut
+    game_version: 1.3.998
+  - game_name: PremiumMoneyBackRoulette
+    game_version: 1.3.1020
+  - game_name: RubyWalshChampionsGold1KScratch
+    game_version: 1.3.1073
+  - game_name: FootyFrenzy2022Scratch1K
+    game_version: 1.3.1064
+  - game_name: PaddyPowerShowtime
+    game_version: 1.3.1043
+  - game_name: RubyWalshChampionsGold
+    game_version: 1.3.1014
+  - game_name: LuckyMine
+    game_version: 1.3.1069
+  - game_name: MoneyTower
+    game_version: 1.3.1071
+  - game_name: TumbleDwarfMysteryGold
+    game_version: 1.3.1070
+  - game_name: TowerOfWealth
+    game_version: 1.3.1068
+  - game_name: MoodsofHecate
+    game_version: 1.3.1078
+  - game_name: GoldenOdysseyMM
+    game_version: 1.3.949
+  - game_name: BigBlueBountyStickyWins
+    game_version: 1.4.786
+  - game_name: SundayJackpot
+    game_version: 1.4.92
+  - game_name: PPBlackJack
+    game_version: 1.4.674
+  - game_name: TumbleDwarf
+    game_version: 1.3.888
+  - game_name: DemolitionDan
+    game_version: 1.3.951
+  - game_name: RubyQueenOfFreeSpins
+    game_version: 1.3.78
+  - game_name: DragonRoll
+    game_version: 1.3.908
+  - game_name: BuffaloRespin
+    game_version: 1.3.327
+  - game_name: BarbarianTreasures
+    game_version: 1.3.335
+  - game_name: GoldenPot
+    game_version: 1.3.401
+  - game_name: KeepingUpWithThePaddys
+    game_version: 1.3.334
+  - game_name: JigsAndReels
+    game_version: 1.3.314
+  - game_name: WildWildWeb
+    game_version: 1.3.418
+  - game_name: GoldenThunder
+    game_version: 1.3.236
+  - game_name: HappyHour
+    game_version: 1.3.431
+  - game_name: ShamanSpins
+    game_version: 1.3.747
+  - game_name: PearlRespins
+    game_version: 1.3.827
+  - game_name: AgesOfFortune
+    game_version: 1.3.828
+  - game_name: CloningSheep
+    game_version: 1.3.527
+  - game_name: PoseidonFortune
+    game_version: 1.3.728
+  - game_name: FootyFrenzy2022
+    game_version: 1.3.502
+  - game_name: GhostsNReels
+    game_version: 1.3.851
+  - game_name: SlottingSlopes
+    game_version: 1.3.519
+  - game_name: SmoothieSmash
+    game_version: 1.3.571
+  - game_name: BigRacing
+    game_version: 1.3.716
+  - game_name: WishAWin
+    game_version: 1.3.790
+  - game_name: SpyAffairs
+    game_version: 1.3.791
+  - game_name: WorldOfWizards
+    game_version: 1.3.817
+  - game_name: GiftsOfRa
+    game_version: 1.3.792
+  - game_name: EagleOfWealth
+    game_version: 1.3.1329

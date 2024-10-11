@@ -1,0 +1,11 @@
+---
+- name: Deploy devlobby - S3
+  gather_facts: true
+  hosts: localhost
+  roles:
+    - casino.gamedeploy.devlobby_upload_s3
+  vars:
+    bucket: ggn-uki-infra-zone1-{{ env }}-static-content
+  vars_files:
+    - ../env_vars/{{env}}/common.yml
+...

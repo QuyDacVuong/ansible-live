@@ -1,0 +1,19 @@
+---
+- hosts: role_ggn_ppb_integration_gw
+  name: PPB Integration servers
+  roles:
+    - casino.server.chrony
+    - casino.server.common
+    - name: casino.server.ppbintegration
+      vars:
+        advertise_host: "{{ hostvars[inventory_hostname]['private_ip_address'] }}"
+        ppb_ggn_pfx: "{{ lookup('amazon.aws.aws_secret', '/{{ env }}/ppb/ggn.pfx', secret_type='binary' )}}"
+        ppb_truststore: "{{ lookup('amazon.aws.aws_secret', '/{{ env }}/ppb/truststore.jks', secret_type='binary' )}}"
+        betfair_rgs_pass: "{{ lookup('amazon.aws.ssm_parameter', '/{{ env }}/ppb/betfair_rgs_pass') }}"
+        paddy_rgs_pass: "{{ lookup('amazon.aws.ssm_parameter', '/{{ env }}/ppb/paddy_rgs_pass') }}"
+        ggn_keyst_pass: "{{ lookup('amazon.aws.ssm_parameter', '/{{ env }}/ppb/ggn_keyst_pass') }}"
+        ggn_store_pass: "{{ lookup('amazon.aws.ssm_parameter', '/{{ env }}/ppb/ggn_store_pass') }}"
+    - casino.server.ssm_inventory
+  vars_files:
+    - ../env_vars/{{env}}/common.yml
+    - ../env_vars/{{env}}/ppbintegration.yml

@@ -1,0 +1,7 @@
+---
+#ansible_connection: aws_ssm
+ansible_connection: psrp
+ansible_shell_type: powershell
+ansible_become: false
+ansible_psrp_protocol: https
+ansible_psrp_cert_validation: ignore

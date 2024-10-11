@@ -1,0 +1,12 @@
+---
+concentrator_binaries:
+  - binary: pyr64.exe
+    url_path: build-results/coreserver/{{ coresever_bin_branch }}/disp64/
+    dest_path: D:\apps\c_concentrator
+  - binary: pyrssl64.exe
+    url_path: build-results/coreserver/{{ coresever_bin_branch }}/localssl/
+    dest_path: D:\apps\c_concentrator\
+
+concentrator_logger: |
+  server=ip:{{ hostvars[groups.role_ggn_hercules.0]['private_ip_address'] }}:9322
+  station={{ stationname }}.CONCENTRATOR-{{ hostvars[inventory_hostname]['private_ip_address'].split('.')[-1] }}

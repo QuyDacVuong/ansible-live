@@ -1,0 +1,30 @@
+---
+
+hercules_binaries:
+  - binary: pyrdisp.exe
+    url_path: build-results/coreserver/TAG/2205C/disp/
+    dest_path: D:\apps\c_monitormain\
+  - binary: pyrhedssmem.exe
+    url_path: build-results/monitor/master/2402/hedataserver/
+    dest_path: D:\apps\c_monitormain\
+  - binary: pyrheessmem.exe
+    url_path: build-results/monitor/master/2402/heemailserver/
+    dest_path: D:\apps\c_monitormain\
+  - binary: pyrhehssmem.exe
+    url_path: build-results/monitor/master/2402/hehttpserver/
+    dest_path: D:\apps\c_monitormain\
+  - binary: pyrheissmem.exe
+    url_path: build-results/monitor/master/2402/heinfoserver/
+    dest_path: D:\apps\c_monitormain\
+  - binary: pyrhejdgsmem.exe
+    url_path: build-results/monitor/master/2402/hejudge/
+    dest_path: D:\apps\c_monitormain\
+  - binary: pyrhemngmsmem.exe
+    url_path: build-results/monitor/master/2402/hemngmserver/
+    dest_path: D:\apps\c_monitormain\
+  - binary: pyrhercpsmem.exe
+    url_path: build-results/monitor/master/2402/hereception/
+    dest_path: D:\apps\c_monitormain\
+  - binary: pyrstatussendersmem.exe
+    url_path: build-results/coreserver/TAG/2205C/pyrstatussender/
+    dest_path: D:\apps\c_monitormain\

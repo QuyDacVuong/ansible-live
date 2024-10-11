@@ -1,0 +1,29 @@
+datafeedgateway_binaries:
+  - binary: pyr64.exe
+    url_path: build-results/coreserver/{{ coresever_bin_branch }}/disp64/
+    dest_path: D:\apps\c_auxukgw\
+  - binary: auxdataservices.exe
+    url_path: build-results/casinoserver/{{ casinosever_bin_branch }}/auxdataservices/
+    dest_path: D:\apps\bin\c_auxukgw\
+  - binary: libcrypto-1_1.dll
+    url_path: build-results/casinoserver/master/current_202105281126-032872de68ef/auxdataservices/resources/externaldll/
+    dest_path: D:\apps\bin\c_auxukgw\
+  - binary: libssl-1_1.dll
+    url_path: build-results/casinoserver/master/current_202105281126-032872de68ef/auxdataservices/resources/externaldll/
+    dest_path: D:\apps\bin\c_auxukgw\
+  - binary: lz4.dll
+    url_path: build-results/casinoserver/master/current_202105281126-032872de68ef/auxdataservices/resources/externaldll/
+    dest_path: D:\apps\bin\c_auxukgw\
+  - binary: rdkafka.dll
+    url_path: build-results/casinoserver/master/current_202105281126-032872de68ef/auxdataservices/resources/externaldll/
+    dest_path: D:\apps\bin\c_auxukgw\
+  - binary: zlib.dll
+    url_path: build-results/casinoserver/master/current_202105281126-032872de68ef/auxdataservices/resources/externaldll/
+    dest_path: D:\apps\bin\c_auxukgw\
+  - binary: zstd.dll
+    url_path: build-results/casinoserver/master/current_202105281126-032872de68ef/auxdataservices/resources/externaldll/
+    dest_path: D:\apps\bin\c_auxukgw\
+
+
+datfeedgateway_kafka: |
+  bootstrap.servers=core.kafka.guea.skybetservices.com:19093,core.kafka.guea.skybetservices.com:19094,core.kafka.guea.skybetservices.com:19095

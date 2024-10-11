@@ -1,0 +1,16 @@
+---
+- hosts: role_ggn_data_feed_gw
+  name: DataFeedGateway servers
+  roles:
+    - casino.server.common
+    - name: casino.server.telgateway
+      role: casino.server.telgateway
+      tags:
+        - telgateway
+    - casino.server.generate_certs
+    - casino.server.datafeedgateway
+    - casino.server.ssm_inventory
+  vars_files:
+    - ../env_vars/{{env}}/aws.yml
+    - ../env_vars/{{env}}/common.yml
+    - ../env_vars/{{env}}/datafeedgateway.yml

@@ -1,0 +1,10 @@
+---
+# the ordering of the below is deliberate and matches the order they should be started in
+# (see also ./deployment-scripts/start_zone1.sh)
+- import_playbook: hercules.yml
+- import_playbook: concentrator.yml
+- import_playbook: gdk_table_server.yml
+- import_playbook: non_gdk_table_server.yml
+- import_playbook: lobby.yml
+- import_playbook: oltp.yml
+- import_playbook: datafeedgateway.yml

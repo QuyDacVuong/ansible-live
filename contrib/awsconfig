@@ -1,0 +1,69 @@
+[profile ggn-uki-build]
+sso_start_url = https://sts-sso.awsapps.com/start
+sso_region = us-east-1
+sso_account_id = 254949526466
+sso_role_name = fi_AWSAdmin
+
+[profile ggn-uki-development]
+sso_start_url = https://sts-sso.awsapps.com/start
+sso_region = us-east-1
+sso_account_id = 822385425154
+sso_role_name = fi_AWSAdmin
+region = eu-west-1
+
+[profile ggn-uki-security]
+sso_start_url = https://sts-sso.awsapps.com/start
+sso_region = us-east-1
+sso_account_id = 882904394386
+sso_role_name = fi_AWSAdmin
+
+[profile ggn-uki-integration]
+sso_start_url = https://sts-sso.awsapps.com/start
+sso_region = us-east-1
+sso_account_id = 930960125481
+sso_role_name = fi_AWSAdmin
+
+[profile ggn-uki-management-nonprod]
+sso_start_url = https://sts-sso.awsapps.com/start
+sso_region = us-east-1
+sso_account_id = 330521471863
+sso_role_name = fi_AWSAdmin
+
+[profile ggn-uki-management-prod]
+sso_start_url = https://sts-sso.awsapps.com/start
+sso_region = us-east-1
+sso_account_id = 809192867110
+sso_role_name = fi_AWSAdmin
+
+[profile ggn-uki-preprod]
+sso_start_url = https://sts-sso.awsapps.com/start
+sso_region = us-east-1
+sso_account_id = 277967614917
+sso_role_name = fi_AWSAdmin
+
+[profile fls-fs-qa-ggn-uki-1]
+sso_start_url = https://sts-sso.awsapps.com/start
+sso_region = us-east-1
+sso_account_id = 000723071715
+sso_role_name = fi_AWSAdmin
+
+[profile ggn-uki-qa2]
+sso_start_url = https://sts-sso.awsapps.com/start
+sso_region = us-east-1
+sso_account_id = 689895483247
+sso_role_name = fi_AWSAdmin
+
+[profile sts-casino-dev]
+sso_start_url = https://sts-sso.awsapps.com/start
+sso_region = us-east-1
+sso_account_id = 343158253885
+sso_role_name = AWSAdministratorAccess
+
+[profile sts-casino-prod]
+sso_start_url = https://sts-sso.awsapps.com/start
+sso_region = us-east-1
+sso_account_id = 836699385110
+sso_role_name = DevOps
+
+[profile terraform]
+credential_process = sh -c "ls -t  ~/.aws/cli/cache/*.json  | head -n1 | xargs cat | jq -r '.Credentials + {Version: 1}'"

@@ -1,0 +1,9 @@
+---
+- hosts: role_ggn_ghactions_runner
+
+  name: Add Github Self hosted runner
+  roles:
+    - casino.server.chrony
+    - casino.server.gh_runner
+  vars_files:
+    - ../env_vars/{{env}}/common.yml

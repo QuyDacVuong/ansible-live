@@ -1,0 +1,9 @@
+---
+- name: UGC Deploy - S3
+  gather_facts: true
+  hosts: localhost
+  roles:
+    - casino.gamedeploy.ugc_deploy_s3
+  vars_files:
+    - ../env_vars/{{ env }}/common.yml
+...

@@ -1,0 +1,9 @@
+---
+- name: Game Deploy - S3
+  gather_facts: true
+  hosts: localhost
+  roles:
+    - casino.gamedeploy.game_upload_s3
+  vars_files:
+    - ../env_vars/{{env}}/common.yml
+...

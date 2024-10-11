@@ -1,0 +1,62 @@
+---
+
+artifactory_baseurl: "https://artifactory.pokerstars.com/artifactory"
+artifactory_releases_folder: "releasesraw"
+ggn_application_logs_bucket: "ggn-uki-infra-zone1-prod-ggn-application-logs"
+game_files_bucket: "ggn-uki-infra-zone1-prod-game-files"
+get_url_force_basic_auth: false
+certificate_authority_arn: "arn:aws:acm-pca:eu-west-1:438758812694:certificate-authority/4fee1608-f288-44fa-96c5-faeb91d026fc"
+stationname: "PROD"
+hercules_environment: "prod"
+ansible_aws_ssm_bucket_name: ggn-uki-infra-zone1-prod-ansible-ssm
+netapp_path: "1489295"
+protostar_akamai_url: "--production https://cdn.prod.nonprod.ggn-uki.com/auxgames/libs/protostar.js"
+static_content_bucket: "ggn-uki-infra-zone1-prod-static-content"
+
+db_config:
+  dbs:
+    zone1-oltp:
+      dbname: ROOTAXZ1
+      host: 100.112.172.215
+      port: 50000
+  parameters:
+    - name: ConnectTimeout
+      value: 180
+    - name: IsolationLevel
+      value: SQL_TXN_READ_UNCOMMITTED
+
+public_domain: "prod.ggn-uki.com"
+smtp_host: "10.42.9.23"
+sharedzone_crm: "100.112.133.24"
+SBGGatewayUrl: "https://gate.sbgservices.com/aux"
+
+loki_url: https://services.loki.distributor.casino.iss.starsops.com/loki/api/v1/push
+
+C_ZNS_LOBBY: "ip:100.122.188.115:2348"
+C_ZNS_REEF_LOBBY: "ip:100.122.188.115:3348"
+C_ZNS_OLAP: "ip:auxolap:port"
+C_ZNS_OLTP: "ip:100.122.188.125:2348"
+C_TEMPLATESERVER: "ip:100.122.184.56:34453"
+C_ZNS_OLAP_BROKER_IP: "10.42.47.227:2348"
+
+C_ENTROPY_DUB1: "ip:10.56.64.61:33303"
+C_ENTROPY_DUB2: "ip:10.56.64.62:33303"
+C_ENTROPY_DUB3: "ip:10.56.64.60:33303"
+
+C_ENTROPY_MAL1: "ip:10.96.20.61:33303"
+
+ICE_OS: "ip:10.42.20.30:3348"
+LOGINDBM: "ip:100.122.190.26:33809"
+PYRHUB: "ip:100.122.190.14:34477"
+TEMPLATESERVER: "ip:100.122.184.56:34453"
+C_ZN1_AUXADMIN_ENV: "IOM"
+FCS_CASINO_AWS: "ip:100.112.176.31:34969"
+FCS_CASINO_IOM: "ip:10.42.20.150:34969"
+
+coresever_bin_branch: "TAG/2403D"
+casinosever_bin_branch: "TAG/AUX2403"
+
+service_start_mode: "manual"
+service_state: "stopped"
+
+dsname: "ROOTAXZ1"

@@ -1,0 +1,9 @@
+---
+- name: UGC Deploy - Akamai
+  gather_facts: true
+  hosts: localhost
+  roles:
+    - casino.gamedeploy.ugc_deploy_akamai
+  vars_files:
+    - ../env_vars/{{ env }}/common.yml
+...

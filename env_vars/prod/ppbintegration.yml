@@ -1,0 +1,23 @@
+---
+ppbintegration_tomcat_version: 8.5.99
+ppbbackofficegateway_version: 1.0.7
+
+ppb_backoffice_gateways: |
+  [BACKOFFICE_BETFAIR]
+  BGIURL=https://bgi.flutterb2b.com/bf/BetfairGamingInterfaceService/v1
+  RgsUser=Ggn
+  RgsPassword={{ betfair_rgs_pass }}
+  KeyStore=ggn.pfx
+  KeyStorePass={{ ggn_keyst_pass }}
+  TrustStore=truststore.jks
+  StorePass={{ ggn_store_pass }}
+
+  [BACKOFFICE_PADDYPOWER]
+  BGIURL=https://bgi.flutterb2b.com/pp/BetfairGamingInterfaceService/v1
+  RgsUser=Ggn
+  RgsPassword={{ paddy_rgs_pass }}
+  KeyStore=ggn.pfx
+  KeyStorePass={{ ggn_keyst_pass }}
+  TrustStore=truststore.jks
+  StorePass={{ ggn_store_pass }}
+  

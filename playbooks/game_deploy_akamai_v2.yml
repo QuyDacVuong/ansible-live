@@ -1,0 +1,9 @@
+---
+- name: Game Upload - Akamai
+  gather_facts: true
+  hosts: localhost
+  roles:
+    - casino.gamedeploy.game_upload_akamai_v2
+  vars_files:
+    - ../env_vars/{{env}}/common.yml
+...

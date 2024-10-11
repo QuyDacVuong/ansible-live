@@ -1,0 +1,187 @@
+---
+lobby_folders:
+   - D:\apps\bin\c_lobby
+   - D:\apps\c_lobby
+   - D:\apps\configs\c_lobby
+   - D:\apps\configs\c_lobby\entropy
+   - D:\apps\configs\c_lobby\login
+   - D:\apps\configs\hh_locale
+   - D:\apps\logs\c_lobby
+
+lobby_binaries:
+  - binary: auxadmin.exe
+    url_path: build-results/casinoserver/{{ casinosever_bin_branch }}/auxadmin/
+    dest_path: D:\apps\bin\c_lobby
+  - binary: auxhhserver.exe
+    url_path: build-results/casinoserver/{{ casinosever_bin_branch }}/auxhhserver/
+    dest_path: D:\apps\bin\c_lobby
+  - binary: auxids.exe
+    url_path: build-results/casinoserver/{{ casinosever_bin_branch }}/auxids/
+    dest_path: D:\apps\bin\c_lobby
+  - binary: auxintegrationserver.exe
+    url_path: build-results/casinoserver/{{ casinosever_bin_branch }}/auxintegrationserver/
+    dest_path: D:\apps\bin\c_lobby
+  - binary: auxisadaptorppb.exe
+    url_path: build-results/casinoserver/{{ casinosever_bin_branch }}/auxisadaptorppb/
+    dest_path: D:\apps\bin\c_lobby
+  - binary: auxisadaptorsbg.exe
+    url_path: build-results/casinoserver/{{ casinosever_bin_branch }}/auxisadaptorsbg/
+    dest_path: D:\apps\bin\c_lobby
+  - binary: auxisassistant.exe
+    url_path: build-results/casinoserver/{{ casinosever_bin_branch }}/auxisassistant/
+    dest_path: D:\apps\bin\c_lobby
+  - binary: auxlobby.exe
+    url_path: build-results/casinoserver/{{ casinosever_bin_branch }}/auxlobby/
+    dest_path: D:\apps\bin\c_lobby
+  - binary: auxrgsmessagerouter.exe
+    url_path: build-results/casinoserver/{{ casinosever_bin_branch }}/auxrgsmessagerouter/
+    dest_path: D:\apps\bin\c_lobby
+  - binary: auxshadowlobby.exe
+    url_path: build-results/casinoserver/{{ casinosever_bin_branch }}/auxshadowlobby/
+    dest_path: D:\apps\bin\c_lobby
+  - binary: auxtablemonitorserver.exe
+    url_path: build-results/casinoserver/{{ casinosever_bin_branch }}/auxtablemonitorserver/
+    dest_path: D:\apps\bin\c_lobby
+  - binary: auxtrigger.exe
+    url_path: build-results/casinoserver/{{ casinosever_bin_branch }}/auxtrigger/
+    dest_path: D:\apps\bin\c_lobby
+  - binary: pyrmultiproxysmem.exe
+    url_path: build-results/coreserver/{{ coresever_bin_branch }}/multiproxy/
+    dest_path: D:\apps\bin\c_lobby
+  - binary: pyr64.exe
+    url_path: build-results/coreserver/{{ coresever_bin_branch }}/disp64/
+    dest_path: D:\apps\c_lobby
+
+lobby_configs:
+  - src: configs/c_lobby/auxadaptor_ppb.ini
+    dest: D:\apps\configs\c_lobby\auxadaptor_ppb.ini
+  - src: configs/c_lobby/auxadaptor_sbg.ini
+    dest: D:\apps\configs\c_lobby\auxadaptor_sbg.ini
+  - src: configs/c_lobby/auxadmin.ini
+    dest: D:\apps\configs\c_lobby\auxadmin.ini
+  - src: configs/c_lobby/auxhhserver.ini
+    dest: D:\apps\configs\c_lobby\auxhhserver.ini
+  - src: configs/c_lobby/auxlobby.ini
+    dest: D:\apps\configs\c_lobby\auxlobby.ini
+  - src: configs/c_lobby/AuxShadow.ini
+    dest: D:\apps\configs\c_lobby\AuxShadow.ini
+  - src: configs/c_lobby/auxtrigger.ini
+    dest: D:\apps\configs\c_lobby\auxtrigger.ini
+  - src: configs/c_lobby/dispatcher.ini
+    dest: D:\apps\configs\c_lobby\dispatcher.ini
+  - src: configs/c_lobby/IntegrationServer.ini
+    dest: D:\apps\configs\c_lobby\IntegrationServer.ini
+  - src: configs/c_lobby/isassistant.ini
+    dest: D:\apps\configs\c_lobby\isassistant.ini
+  - src: configs/c_lobby/RgsMessageRouter.ini
+    dest: D:\apps\configs\c_lobby\RgsMessageRouter.ini
+  - src: configs/c_lobby/TableMonitorServer.ini
+    dest: D:\apps\configs\c_lobby\TableMonitorServer.ini
+  - src: configs/c_lobby/entropy/multiproxy.ini
+    dest: D:\apps\configs\c_lobby\entropy\multiproxy.ini
+  - src: configs/c_lobby/login/IntegrationServer.ini
+    dest: D:\apps\configs\c_lobby\login\IntegrationServer.ini
+  - src: apps/monitor_client/Hercules.ini
+    dest: D:\apps\monitor_client\Hercules.ini
+  - src: apps/monitor_client/MemSender.ini
+    dest: D:\apps\monitor_client\MemSender.ini
+  - src: apps/c_lobby/dispatcher.ini
+    dest: D:\apps\c_lobby\dispatcher.ini
+
+lobby_ip2country_binaries:
+  - binary: pyrip2countrysmem.exe
+    url_path: build-results/coreserver/{{ coresever_bin_branch }}/ip2country/
+    dest_path: D:\apps\bin\c_ip2country\
+  - binary: pyr64.exe
+    url_path: build-results/coreserver/{{ coresever_bin_branch }}/disp64/
+    dest_path: D:\apps\c_ip2country\
+  - binary: download_and_import.exe
+    url_path: ggn-applications/
+    dest_path: D:\resolver
+  - binary: pyrgeoiprereadsmem.exe
+    url_path: build-results/coreserver/{{ coresever_bin_branch }}/pyrgeoipreread/
+    dest_path: D:\resolver
+
+lobby_reef_binaries:
+  - binary: pyr64.exe
+    url_path: build-results/coreserver/{{ coresever_bin_branch }}/disp64/
+    dest_path: D:\apps\c_reef_lobby
+  - binary: auxreef.exe
+    url_path: build-results/casinoserver/{{ casinosever_bin_branch }}/auxreef/
+    dest_path: D:\apps\bin\c_reef_lobby
+
+lobby_dispatcher_exe: |
+  ;type=exe
+  auxadmin=d:\apps\bin\c_lobby\auxadmin.exe;d:\apps\logs\c_lobby
+  auxisassistant=d:\apps\bin\c_lobby\auxisassistant.exe;d:\apps\logs\c_lobby
+  auxlobby=d:\apps\bin\c_lobby\auxlobby.exe;d:\apps\logs\c_lobby;0/0;R240
+  auxtrigger=d:\apps\bin\c_lobby\auxtrigger.exe;d:\apps\logs\c_lobby
+  entropyProxy=d:\apps\bin\c_lobby\pyrmultiproxysmem.exe;d:\apps\logs\c_lobby
+  handhistory=d:\apps\bin\c_lobby\auxhhserver.exe;d:\apps\logs\c_lobby
+  integrationdispatcher=d:\apps\bin\c_lobby\auxids.exe;d:\apps\logs\c_lobby;0/0;R240
+  integrationserver=d:\apps\bin\c_lobby\auxintegrationserver.exe;d:\apps\logs\c_lobby;0/0;R240
+  integrationserver_ppb=d:\apps\bin\c_lobby\auxisadaptorppb.exe;d:\apps\logs\c_lobby
+  integrationserver_sbg=d:\apps\bin\c_lobby\auxisadaptorsbg.exe;d:\apps\logs\c_lobby
+  rgrouter=d:\apps\bin\c_lobby\auxrgsmessagerouter.exe;d:\apps\logs\c_lobby
+  shadowlobby=d:\apps\bin\c_lobby\auxshadowlobby.exe;d:\apps\logs\c_lobby
+  tablemonitor=d:\apps\bin\c_lobby\auxtablemonitorserver.exe;d:\apps\logs\c_lobby
+
+lobby_dispatcher_start: |
+  auxadmin=AuxAdminServerInstance;ver=1;[ini_path=D:\apps\configs\c_lobby\;station_name={{ stationname }}.C_LOBBY.AuxAdminServer-{{ hostvars[inventory_hostname]['private_ip_address'].split('.')[-1] }};service_path=D:\apps\configs\esl.json;zoneConfig=D:\apps\configs\zone1_settings.ini]
+  auxisassistant=AuxISAssistantInstance;ver=1;[ini_path=D:\apps\configs\c_lobby\;station_name={{ stationname }}.C_LOBBY.AuxISAssistant-{{ hostvars[inventory_hostname]['private_ip_address'].split('.')[-1] }};service_path=D:\apps\configs\esl.json;zoneConfig=D:\apps\configs\zone1_settings.ini]
+  auxlobby=AuxLobbyServerInstance;ver=1;[ini_path=D:\apps\configs\c_lobby\;station_name={{ stationname }}.C_LOBBY.AuxLobby-{{ hostvars[inventory_hostname]['private_ip_address'].split('.')[-1] }};service_path=D:\apps\configs\esl.json;zoneConfig=D:\apps\configs\zone1_settings.ini]
+  auxtrigger=AuxTriggerServerInstance;ver=1;[ini_path=D:\apps\configs\c_lobby\;station_name={{ stationname }}.C_LOBBY.AuxTrigger-{{ hostvars[inventory_hostname]['private_ip_address'].split('.')[-1] }};service_path=D:\apps\configs\esl.json;zoneConfig=D:\apps\configs\zone1_settings.ini]
+  entropyProxy=AuxEntropyServerInstance;s=d:\\apps\\configs\\c_lobby\\entropy\\
+  handhistory=handHistoryInstance;ver=1;[ini_path=D:\apps\configs\c_lobby\;station_name={{ stationname }}.C_LOBBY.AuxHandHistoryServer-{{ hostvars[inventory_hostname]['private_ip_address'].split('.')[-1] }};service_path=D:\apps\configs\esl.json;zoneConfig=D:\apps\configs\zone1_settings.ini]
+  integrationdispatcher=AuxIDSInstance;ver=1;[ini_path=D:\apps\configs\c_lobby\;station_name={{ stationname }}.C_LOBBY.AuxIDS-{{ hostvars[inventory_hostname]['private_ip_address'].split('.')[-1] }};service_path=D:\apps\configs\esl.json;zoneConfig=D:\apps\configs\zone1_settings.ini]
+  integrationserver=IntegrationServerInstance;ver=1;[ini_path=D:\apps\configs\c_lobby\;station_name={{ stationname }}.C_LOBBY.AuxIntegrationServer-{{ hostvars[inventory_hostname]['private_ip_address'].split('.')[-1] }};service_path=D:\apps\configs\esl.json;zoneConfig=D:\apps\configs\zone1_settings.ini]
+  integrationserver=IntegrationServerLoginInstance;ver=1;[ini_path=D:\apps\configs\c_lobby\login\;station_name={{ stationname }}.C_LOBBY.AuxIntegrationServer-login-{{ hostvars[inventory_hostname]['private_ip_address'].split('.')[-1] }};service_path=D:\apps\configs\esl.json;zoneConfig=D:\apps\configs\zone1_settings.ini]
+  integrationserver_ppb=AuxPPBAdaptorInstance;ver=1;[ini_path=D:\apps\configs\c_lobby\;station_name={{ stationname }}.C_LOBBY.PPBAuxAdaptor-{{ hostvars[inventory_hostname]['private_ip_address'].split('.')[-1] }};service_path=D:\apps\configs\esl.json;zoneConfig=D:\apps\configs\zone1_settings.ini]
+  integrationserver_sbg=AuxSBGAdaptorInstance;ver=1;[ini_path=D:\apps\configs\c_lobby\;station_name={{ stationname }}.C_LOBBY.SBGAuxAdaptor-{{ hostvars[inventory_hostname]['private_ip_address'].split('.')[-1] }};service_path=D:\apps\configs\esl.json;zoneConfig=D:\apps\configs\zone1_settings.ini]
+  rgrouter=AuxRgMessageRouterInstance;ver=1;[ini_path=D:\apps\configs\c_lobby\;station_name={{ stationname }}.C_LOBBY.AuxRgsRouter-{{ hostvars[inventory_hostname]['private_ip_address'].split('.')[-1] }};service_path=D:\apps\configs\esl.json;zoneConfig=D:\apps\configs\zone1_settings.ini]
+  shadowlobby=AuxShadowLobbyInstance;ver=1;[ini_path=D:\apps\configs\c_lobby\;station_name={{ stationname }}.C_LOBBY.AuxShadowLobby-{{ hostvars[inventory_hostname]['private_ip_address'].split('.')[-1] }};service_path=D:\apps\configs\esl.json;zoneConfig=D:\apps\configs\zone1_settings.ini]
+  tablemonitor=AuxTableMonitorServerInstance;ver=1;[ini_path=D:\apps\configs\c_lobby\;station_name={{ stationname }}.C_LOBBY.TableMonitorServer-{{ hostvars[inventory_hostname]['private_ip_address'].split('.')[-1] }};service_path=D:\apps\configs\esl.json;zoneConfig=D:\apps\configs\zone1_settings.ini]
+
+
+lobby_entropy_multiproxy_servers: |
+  server=active1
+  server=active2
+  server=standby
+
+lobby_entropy_multiproxy_limits: |
+  number=2
+
+lobby_entropy_multiproxy_server_lists: |
+  [active1]
+  server={{ C_ENTROPY_DUB1 }}
+  serverobject=EntropyMonitorInstance
+
+  [active2]
+  server={{ C_ENTROPY_DUB2 }}
+  serverobject=EntropyMonitorInstance
+
+  [standby]
+  server={{ C_ENTROPY_DUB3 }}
+  serverobject=EntropyMonitorInstance
+
+lobby_entropy_entropyrouter_allrule: |
+  sites=ALL
+  primaryEntropy=DublinEntropy
+  secondaryEntropy=MaltaEntropy
+
+lobby_entropy_entropyrouter_list: |
+  [DublinEntropy]
+  entropyaddress=ip:{{ hostvars[inventory_hostname]['private_ip_address'] }}:2348
+  entropyobject=AuxEntropyProxyDublinInstance
+
+  [MaltaEntropy]
+  entropyaddress=ip:{{ hostvars[inventory_hostname]['private_ip_address'] }}:2348
+  entropyobject=AuxEntropyProxyMaltaInstance
+
+lobby_playtech_live_vendor_name: "skbv-uk:skyvegasew5.uk"
+resolver_remote_host: 100.122.182.107
+lobby_entropy_dgeentropy_dynamicconnect: ""
+lobby_auxlobby_dynamicsettings_multitabletypes: "PM,RM"
+sharedzone_olap: "100.122.188.120"
+
+resolver_remote_folder: "out/config/pr"

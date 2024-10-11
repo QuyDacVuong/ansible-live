@@ -1,0 +1,6 @@
+---
+- import_playbook: cipwa.yml
+- import_playbook: entropy.yml
+- import_playbook: ggndemobackoffice.yml
+- import_playbook: ppbintegration.yml
+- import_playbook: sbgintegration.yml

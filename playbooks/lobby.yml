@@ -1,0 +1,16 @@
+---
+- hosts: role_ggn_lobby
+  name: Lobby servers
+  gather_facts: true
+  roles:
+    - name: casino.server.common
+    - name: casino.server.telgateway
+      role: casino.server.telgateway
+      tags:
+        - telgateway
+    - name: casino.server.lobby
+    - name: casino.server.ip2country
+    - casino.server.ssm_inventory
+  vars_files:
+    - ../env_vars/{{ env }}/common.yml
+    - ../env_vars/{{ env }}/lobby.yml

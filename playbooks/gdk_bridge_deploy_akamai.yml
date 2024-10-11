@@ -1,0 +1,9 @@
+---
+- name: GDK Bridge Deploy - Akamai
+  gather_facts: true
+  hosts: localhost
+  roles:
+    - casino.gamedeploy.gdk_bridge_deploy_akamai
+  vars_files:
+    - ../env_vars/{{ env }}/common.yml
+...

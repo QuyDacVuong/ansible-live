@@ -1,0 +1,17 @@
+---
+- hosts: role_ggn_demo_back_office
+  name: GGN DemoBackOffice servers
+  roles:
+    - casino.server.chrony
+    - casino.server.common
+    - casino.server.generate_certs
+    - name: casino.server.ggndemobackoffice
+      vars:
+        ggndemobackoffice_api_password: "{{ lookup('amazon.aws.ssm_parameter', '/{{ env }}/common/sbg-integration-password') }}"
+        ggndemobackoffice_tomcat_version: 8.5.99
+        advertise_host: "{{ hostvars[inventory_hostname]['private_ip_address'] }}"
+    - casino.server.ssm_inventory
+  vars_files:
+    - ../env_vars/{{ env }}/aws.yml
+    - ../env_vars/{{ env }}/common.yml
+    - ../env_vars/{{ env }}/ggndemobackoffice.yml

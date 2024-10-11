@@ -1,0 +1,85 @@
+---
+lobby_binaries:
+  - binary: auxadmin.exe
+    url_path: build-results/casinoserver/{{ casinosever_bin_branch }}/auxadmin/
+    dest_path: D:\apps\bin\c_lobby
+  - binary: auxhhserver.exe
+    url_path: build-results/casinoserver/{{ casinosever_bin_branch }}/auxhhserver/
+    dest_path: D:\apps\bin\c_lobby
+  - binary: auxids.exe
+    url_path: build-results/casinoserver/{{ casinosever_bin_branch }}/auxids/
+    dest_path: D:\apps\bin\c_lobby
+  - binary: auxintegrationserver.exe
+    url_path: build-results/casinoserver/{{ casinosever_bin_branch }}/auxintegrationserver/
+    dest_path: D:\apps\bin\c_lobby
+  - binary: auxisadaptorppb.exe
+    url_path: build-results/casinoserver/{{ casinosever_bin_branch }}/auxisadaptorppb/
+    dest_path: D:\apps\bin\c_lobby
+  - binary: auxisadaptorsbg.exe
+    url_path: build-results/casinoserver/{{ casinosever_bin_branch }}/auxisadaptorsbg/
+    dest_path: D:\apps\bin\c_lobby
+  - binary: auxisassistant.exe
+    url_path: build-results/casinoserver/{{ casinosever_bin_branch }}/auxisassistant/
+    dest_path: D:\apps\bin\c_lobby
+  - binary: auxlobby.exe
+    url_path: build-results/casinoserver/{{ casinosever_bin_branch }}/auxlobby/
+    dest_path: D:\apps\bin\c_lobby
+  - binary: auxrgsmessagerouter.exe
+    url_path: build-results/casinoserver/{{ casinosever_bin_branch }}/auxrgsmessagerouter/
+    dest_path: D:\apps\bin\c_lobby
+  - binary: auxshadowlobby.exe
+    url_path: build-results/casinoserver/{{ casinosever_bin_branch }}/auxshadowlobby/
+    dest_path: D:\apps\bin\c_lobby
+  - binary: auxtablemonitorserver.exe
+    url_path: build-results/casinoserver/{{ casinosever_bin_branch }}/auxtablemonitorserver/
+    dest_path: D:\apps\bin\c_lobby
+  - binary: auxtrigger.exe
+    url_path: build-results/casinoserver/{{ casinosever_bin_branch }}/auxtrigger/
+    dest_path: D:\apps\bin\c_lobby
+  - binary: pyrdgeentropysmem.exe
+    url_path: casino-devops/dge_qa/
+    dest_path: D:\apps\bin\c_lobby
+  - binary: pyrentropyroutersmem.exe
+    url_path: build-results/coreserver/{{ coresever_bin_branch }}/entropyrouter/
+    dest_path: D:\apps\bin\c_lobby
+  - binary: auxreef.exe
+    url_path: build-results/casinoserver/{{ casinosever_bin_branch }}/auxreef/
+    dest_path: D:\apps\bin\c_reef_lobby
+  - binary: pyr64.exe
+    url_path: build-results/coreserver/{{ coresever_bin_branch }}/disp64/
+    dest_path: D:\apps\c_lobby
+  - binary: pyr64.exe
+    url_path: build-results/coreserver/{{ coresever_bin_branch }}/disp64/
+    dest_path: D:\apps\c_reef_lobby
+
+lobby_ip2country_binaries:
+  - binary: pyrip2countrysmem.exe
+    url_path: build-results/coreserver/{{ coresever_bin_branch }}/ip2country/
+    dest_path: D:\apps\bin\c_ip2country\
+  - binary: pyr64.exe
+    url_path: build-results/coreserver/{{ coresever_bin_branch }}/disp64/
+    dest_path: D:\apps\c_ip2country\
+  - binary: download_and_import.exe
+    url_path: ggn-applications/
+    dest_path: D:\resolver
+  - binary: pyrgeoiprereadsmem.exe
+    url_path: build-results/coreserver/{{ coresever_bin_branch }}/pyrgeoipreread/
+    dest_path: D:\resolver
+
+lobby_entropy_binary: pyrdgeentropysmem.exe
+
+lobby_entropy_dgeentropy_dynamicconnect: |
+  LoginDbmAddress={{ LOGINDBM }}
+  LoginDbmObject=LoginRouterInstance
+  LoginDbmConnType=DgeEntropy
+
+  EntropyAddress=ip:{{ entropy_host }}:33390
+  EntropyObject=RNGEntropyInstance
+  EntropyConnType=
+
+  ; PYR-50101. Connection to AuxLobby, for resetting table-cached dynamic runs
+  AuxLobbyAddress=ip:{{ lobby_host }}:2348
+  AuxLobbyObject=AuxLobbyServerInstance
+  AuxLobbyConnType=dge
+
+resolver_remote_host: 10.89.144.66

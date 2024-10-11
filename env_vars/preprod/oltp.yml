@@ -1,0 +1,209 @@
+oltp_binaries:
+  - binary: pyr64.exe
+    url_path: build-results/coreserver/{{ coresever_bin_branch }}/disp64/
+    dest_path: D:\apps\bin\c_oltp\
+ # - binary: pyrdbmproxy2smem.exe
+ #   url_path: releasesrawserver/coreserver/TAG/PA_PROD_2023_05_2305K
+ #   dest_path: D:\apps\bin\c_oltp\
+ # - binary: pyretcdbmsmem.exe
+ #   url_path: releasesrawserver/coreserver/TAG/PA_PROD_2023_05_2305K
+ #   dest_path: D:\apps\bin\c_oltp\
+ # - binary: pyrm2nproxysmem.exe
+ #   url_path: releasesrawserver/coreserver/TAG/PA_PROD_2023_05_2305K
+ #   dest_path: D:\apps\bin\c_oltp\
+  - binary: pyrolapsaversmem.exe
+    url_path: build-results/coreserver/{{ coresever_bin_branch }}/olapsaver/
+    dest_path: D:\apps\bin\c_oltp\
+  - binary: pyrtobrelaysmem.exe
+    url_path: build-results/coreserver/{{ coresever_bin_branch }}/tobrelay/
+    dest_path: D:\apps\bin\c_tobrelay\
+ # - binary: auxdataservices.exe
+ #   url_path: build-results/casinoserver/TAG/AUX2305/auxdataservices/
+ #   dest_path: D:\apps\bin\c_oltp\
+  - binary: auxdbd.exe
+    url_path: build-results/casinoserver/{{ casinosever_bin_branch }}/auxracedbd/
+    dest_path: D:\apps\bin\c_oltp\
+  - binary: auxdbm.exe
+    url_path: build-results/casinoserver/{{ casinosever_bin_branch }}/auxdbm/
+    dest_path: D:\apps\bin\c_oltp\
+  - binary: auxemailserver.exe
+    url_path: build-results/casinoserver/{{ casinosever_bin_branch }}/auxemailserver/
+    dest_path: D:\apps\bin\c_oltp\
+  - binary: auxintegrationdbm.exe
+    url_path: build-results/casinoserver/{{ casinosever_bin_branch }}/auxintegrationdbm/
+    dest_path: D:\apps\bin\c_oltp\
+  - binary: auxjackpotdbm.exe
+    url_path: build-results/casinoserver/{{ casinosever_bin_branch }}/auxjackpotsdbm/
+    dest_path: D:\apps\bin\c_oltp\
+  - binary: auxproxyserver.exe
+    url_path: build-results/casinoserver/{{ casinosever_bin_branch }}/auxproxyserver/
+    dest_path: D:\apps\bin\c_oltp\
+  - binary: auxtabledbm.exe
+    url_path: build-results/casinoserver/{{ casinosever_bin_branch }}/tabledbmnohhice/
+    dest_path: D:\apps\bin\c_oltp\
+  - binary: auxiddbm.exe
+    url_path: build-results/casinoserver/{{ casinosever_bin_branch }}/auxiddbm/
+    dest_path: D:\apps\bin\c_oltp\
+  - binary: auxreef.exe
+    url_path: build-results/casinoserver/{{ casinosever_bin_branch }}/auxreef/
+    dest_path: D:\apps\bin\c_reef_oltp
+  - binary: RetrieveOutboxRecordsStmt.sql
+    url_path: build-results/coreserver/{{ coresever_bin_branch }}/tobrelay/resources/files/sql/
+    dest_path: D:\apps\configs\c_tobrelay\gameis\sql
+  - binary: sql.ini
+    url_path: build-results/coreserver/{{ coresever_bin_branch }}/tobrelay/resources/files/
+    dest_path: D:\apps\configs\c_tobrelay\gameis\
+  - binary: RetrieveOutboxRecordsStmt.sql
+    url_path: build-results/coreserver/{{ coresever_bin_branch }}/tobrelay/resources/files/sql/
+    dest_path: D:\apps\configs\c_tobrelay\hhice\sql
+  - binary: sql.ini
+    url_path: build-results/coreserver/{{ coresever_bin_branch }}/tobrelay/resources/files/
+    dest_path: D:\apps\configs\c_tobrelay\hhice\
+  - binary: RetrieveOutboxRecordsStmt.sql
+    url_path: build-results/coreserver/{{ coresever_bin_branch }}/tobrelay/resources/files/sql/
+    dest_path: D:\apps\configs\c_tobrelay\loginis\sql
+  - binary: sql.ini
+    url_path: build-results/coreserver/{{ coresever_bin_branch }}/tobrelay/resources/files/
+    dest_path: D:\apps\configs\c_tobrelay\loginis\
+  - binary: RetrieveOutboxRecordsStmt.sql
+    url_path: build-results/coreserver/{{ coresever_bin_branch }}/tobrelay/resources/files/sql/
+    dest_path: D:\apps\configs\c_tobrelay\main\sql
+  - binary: sql.ini
+    url_path: build-results/coreserver/{{ coresever_bin_branch }}/tobrelay/resources/files/
+    dest_path: D:\apps\configs\c_tobrelay\main\
+
+oltp_comm: |
+  name=AppFactory
+  alias=ip:{{ hostvars[inventory_hostname]['private_ip_address'] }}:2348
+  alias=ip:*:2350
+  rule=ip:127.0.0.1:5447 pyrtcp0://127.0.0.1:5447
+  rule=ip:*:* pyrtcp0://$0:$1
+  ;performance=1
+
+oltp_tcp: |
+  port=2348
+  option.keepalive=30000/180000
+  ;gatherstatistic=1
+
+oltp_tcpmux: |
+  port=2350
+  ;gatherstatistic=1
+
+oltp_smem: |
+  port=2348
+  ;gatherstatistic=1
+
+oltp_smemmux: |
+  port=2350
+  ;gatherstatistic=1
+
+oltp_restrictconnections: ""
+
+oltp_exe: |
+  IntegrationDbmProxy=d:\apps\bin\c_oltp\auxproxyserver.exe;d:\apps\logs\c_oltp;0/0;R240
+  integrationdbm=d:\apps\bin\c_oltp\auxintegrationdbm.exe;d:\apps\logs\c_oltp
+  maindbm=d:\apps\bin\c_oltp\auxdbm.exe;d:\apps\logs\c_oltp;0/0;R240
+  tabledbm=d:\apps\bin\c_oltp\auxtabledbm.exe;d:\apps\logs\c_oltp;0/0;R240
+  auxdbd=d:\apps\bin\c_oltp\auxdbd.exe;d:\apps\logs\c_oltp
+  auxemailserver=d:\apps\bin\c_oltp\auxemailserver.exe;d:\apps\logs\c_oltp
+  auxiddbm=d:\apps\bin\c_oltp\auxiddbm.exe;d:\apps\logs\c_oltp
+
+oltp_start: |
+  IntegrationDbmProxy=IntegrationDbmProxyInstance;ver=1;[ini_path=D:\apps\configs\c_oltp\IsDbmProxy\;station_name={{ stationname }}.C_OLTP.AuxGameISDbmProxy-{{ hostvars[inventory_hostname]['private_ip_address'].split('.')[-1] }};service_path=D:\apps\configs\esl.json;zoneConfig=D:\apps\configs\zone1_settings.ini]
+  integrationdbm=IntegrationDbmLoginInstance;ver=1;[ini_path=D:\apps\configs\c_oltp\login\;station_name={{ stationname }}.C_OLTP.AuxLoginISDbm-{{ hostvars[inventory_hostname]['private_ip_address'].split('.')[-1] }};service_path=D:\apps\configs\esl.json;zoneConfig=D:\apps\configs\zone1_settings.ini]
+  integrationdbm=IntegrationRODbmLoginInstance;ver=1;[ini_path=D:\apps\configs\c_oltp\ROlogin\;station_name={{ stationname }}.C_OLTP.AuxLoginISRODbm-{{ hostvars[inventory_hostname]['private_ip_address'].split('.')[-1] }};service_path=D:\apps\configs\esl.json;zoneConfig=D:\apps\configs\zone1_settings.ini]
+  maindbm=AuxDbmServerInstance;ver=1;[ini_path=D:\apps\configs\c_oltp\;station_name={{ stationname }}.C_OLTP.AuxMainDbm-{{ hostvars[inventory_hostname]['private_ip_address'].split('.')[-1] }};service_path=D:\apps\configs\esl.json;zoneConfig=D:\apps\configs\zone1_settings.ini]
+  maindbm=AuxROOltpDbmServerInstance;ver=1;[ini_path=D:\apps\configs\c_oltp\ROdbm\;station_name={{ stationname }}.C_OLTP.AuxMainRODbm-{{ hostvars[inventory_hostname]['private_ip_address'].split('.')[-1] }};service_path=D:\apps\configs\esl.json;zoneConfig=D:\apps\configs\zone1_settings.ini]
+  tabledbm=AuxTableDbmHHICEServerInstance;ver=1;[ini_path=D:\apps\configs\c_oltp\hhicetabledbm\;station_name={{ stationname }}.C_OLTP.AuxTableDbmHHICE-{{ hostvars[inventory_hostname]['private_ip_address'].split('.')[-1] }};service_path=D:\apps\configs\esl.json;zoneConfig=D:\apps\configs\zone1_settings.ini]
+  tabledbm=AuxTableDbmServerInstance;ver=1;[ini_path=D:\apps\configs\c_oltp\;station_name={{ stationname }}.C_OLTP.AuxTableDbm-{{ hostvars[inventory_hostname]['private_ip_address'].split('.')[-1] }};service_path=D:\apps\configs\esl.json;zoneConfig=D:\apps\configs\zone1_settings.ini]
+  auxdbd=AuxMainDbdServerInstance;s=d:\\apps\\configs\\c_oltp\\
+  auxdbd=AuxGamingDbdServerInstance;s=d:\\apps\\configs\\c_oltp\\gamedbd\\
+  auxdbd=AuxLoginDbdServerInstance;s=d:\\apps\\configs\\c_oltp\\logindbd\\
+  auxdbd=AuxAdminDbdServerInstance;s=d:\\apps\\configs\\c_oltp\\auxadmin\\
+  auxdbd=AuxAutomationDbdServerInstance;s=d:\\apps\\configs\\c_oltp\\automationdbd\\
+  auxdbd=AuxEmailDbdServerInstance;s=d:\\apps\\configs\\c_oltp\\emaildbd\\
+  auxemailserver=AuxEmailServerInstance;ver=1;[ini_path=D:\apps\configs\c_oltp\;station_name={{ stationname }}.C_OLTP.AuxEmail-{{ hostvars[inventory_hostname]['private_ip_address'].split('.')[-1] }};service_path=D:\apps\configs\esl.json;zoneConfig=D:\apps\configs\zone1_settings.ini]
+  auxiddbm=AuxIdDbmInstance;ver=1;[ini_path=D:\apps\configs\c_oltp\;station_name={{ stationname }}.C_OLTP.AuxIdDbm-{{ hostvars[inventory_hostname]['private_ip_address'].split('.')[-1] }};service_path=D:\apps\configs\esl.json;zoneConfig=D:\apps\configs\zone1_settings.ini]
+
+oltp_logger: |
+  server=ip:{{ hercules_host }}:9322
+  station={{ stationname }}.C_OLTP.OLTP_DISP-{{ hostvars[inventory_hostname]['private_ip_address'].split('.')[-1] }}
+
+reef_comm: |
+  name=AppFactory
+  alias=ip:{{ hostvars[inventory_hostname]['private_ip_address'] }}:9348
+  alias=ip:*:9350
+  rule=ip:127.0.0.1:5447 pyrtcp0://127.0.0.1:5447
+  rule=ip:*:* pyrtcp0://$0:$1
+
+reef_tcpmux: |
+  port=9350
+  ;gatherstatistic=1
+
+reef_tcp: |
+  port=9348
+  option.islocal=1
+  ;option.protocol=3
+  option.compressbits=0
+  option.logfile=d:\apps\logs\c_reef_oltp\protolocal.log
+  option.keepalive=0/0
+  gatherstatistic=1
+
+reef_smem: |
+  port=9348
+  ;gatherstatistic=1
+
+reef_smemmux: |
+  port=9350
+  ;gatherstatistic=1
+
+reef_exe: |
+  reef=d:\apps\bin\c_reef_oltp\auxreef.exe;d:\apps\logs\c_reef_oltp;0/0;R240
+
+reef_start: |
+  reef=AuxReefReplicaInstance0;s=d:\\apps\\configs\\c_reef_oltp\\replica0\\
+  reef=AuxReefBackupInstance1;s=d:\\apps\\configs\\c_reef_oltp\\backup1\\
+
+reef_logger: |
+  server=ip:{{ hercules_host }}:9322
+  station={{ stationname }}.C_OLTP.REEF_OLTP.REEF_DISP-{{ hostvars[inventory_hostname]['private_ip_address'].split('.')[-1] }}
+
+tobrelay_comm: |
+  name=AppFactory
+  alias=ip:{{ hostvars[inventory_hostname]['private_ip_address'] }}:4348
+  alias=ip:*:4350
+  rule={{ C_ZNS_OLAP }} pyrtcp0://{{ C_ZNS_OLAP_BROKER_IP }}
+  rule=ip:127.0.0.1:5447 pyrtcp0://127.0.0.1:5447
+  rule=ip:*:* pyrtcp0://$0:$1
+  performance=1
+
+tobrelay_tcp: |
+  type=tcp
+  port=4348
+
+tobrelay_tcpmux: |
+  port=4350
+
+tobrelay_smem: |
+  port=4348
+
+tobrelay_smemmux: |
+  port=4350
+
+tobrelay_exe: |
+  tobrelay=d:\apps\bin\c_tobrelay\pyrtobrelaysmem.exe;d:\apps\logs\c_tobrelay\
+
+tobrelay_start: |
+  ; single instances for dbms not using a proxy
+  tobrelay=TOBRelayHHICEInstance;s=d:\\apps\\configs\\c_tobrelay\\hhice\\
+  tobrelay=TOBRelayLoginISInstance;s=d:\\apps\\configs\\c_tobrelay\\loginis\\
+  tobrelay=TOBRelayMainInstance;s=d:\\apps\\configs\\c_tobrelay\\main\\
+
+  ; four instances for gameis because it has a proxy with four instances (../configs/c_oltp/IsDbmProxy/auxproxyserver.ini)
+  {% for instance in range(1, oltp_gameis_proxy_instances+1) %}
+  tobrelay=TOBRelayGameISInstance{{ instance - 1 }};s=d:\\apps\\configs\\c_tobrelay\\gameis\\gameis{{ instance - 1 }}\\
+  {% endfor %}
+
+tobrelay_logger: |
+  server=ip:{{ hercules_host }}:9322
+  station={{ stationname }}.C_OLTP.AUXTOBRELAY_DISP-{{ hostvars[inventory_hostname]['private_ip_address'].split('.')[-1] }}

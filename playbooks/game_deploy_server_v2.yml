@@ -1,0 +1,19 @@
+---
+- name: Game Deploy - Game Server
+  gather_facts: true
+  hosts: role_ggn_gdk
+  roles:
+    - casino.gamedeploy.game_upload_server_v2
+  vars_files:
+    - ../env_vars/{{env}}/common.yml
+    - ../env_vars/{{env}}/gdkhtml5_games.yml
+
+- name: Game files
+  hosts: role_ggn_lobby
+  tasks:
+    - name: S3 sync game files
+      ansible.windows.win_powershell:
+        script: |
+          aws s3 sync s3://{{ game_files_bucket }}/handhistory/ D:\apps\configs\hh_locale
+  vars_files:
+    - ../env_vars/{{env}}/common.yml

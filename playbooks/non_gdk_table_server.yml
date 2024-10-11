@@ -1,0 +1,15 @@
+---
+- hosts: role_ggn_non_gdk
+  name: Non-GDK Table Server
+  gather_facts: true
+  roles:
+    - casino.server.common
+    - name: casino.server.telgateway
+      role: casino.server.telgateway
+      tags:
+        - telgateway
+    - casino.server.non_gdk_table_server
+    - casino.server.ssm_inventory
+  vars_files:
+    - ../env_vars/{{env}}/common.yml
+    - ../env_vars/{{env}}/non_gdk_table_server.yml

@@ -1,0 +1,13 @@
+---
+- hosts: role_ggn_entropy
+  name: Entropy servers
+  roles:
+    - casino.server.chrony
+    - casino.server.common
+    - name: casino.server.entropy
+      vars:
+        advertise_host: "{{ hostvars[inventory_hostname]['private_ip_address'] }}"
+    - casino.server.ssm_inventory
+  vars_files:
+    - ../env_vars/{{ env }}/common.yml
+    - ../env_vars/{{ env }}/entropy.yml

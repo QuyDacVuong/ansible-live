@@ -1,0 +1,16 @@
+---
+- name: CIPWA servers
+  hosts: role_ggn_cipwa
+  roles:
+    - casino.server.chrony
+    - casino.server.common
+    - casino.server.generate_certs
+    - name: casino.server.cipwa
+      role: casino.server.cipwa
+      vars:
+        advertise_host: "{{ hostvars[inventory_hostname]['private_ip_address'] }}"
+    - casino.server.ssm_inventory
+  vars_files:
+    - ../env_vars/{{env}}/aws.yml
+    - ../env_vars/{{env}}/common.yml
+    - ../env_vars/{{env}}/cipwa.yml

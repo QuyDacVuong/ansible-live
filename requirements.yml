@@ -4,6 +4,5 @@ collections:
   # - amazon.aws
   # - community.aws
   # - community.windows
-  - name: https://github.com/QuyDacVuong/ansible-collections.git
+  - name: https://github.com/QuyDacVuong/ansible-collection.git
     type: git
-    version: v1.1.0

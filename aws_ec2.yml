@@ -12,7 +12,7 @@ keyed_groups:
 # This sets the region. If empty (the default) default this will include all regions, except possibly
 # restricted ones like us-gov-west-1 and cn-north-1.
 regions:
-  - "{{ lookup('env', 'AWS_REGION') | default('us-east-1', true) }}"
+  - "us-east-1"
 
 hostnames:
   - tag:Name

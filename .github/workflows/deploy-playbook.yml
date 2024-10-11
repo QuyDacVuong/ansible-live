@@ -18,7 +18,7 @@ on:
         type: choice
         description: 'Select environment'
         options:
-        - development
+        - ncs-development
       dry_run_mode:
         type: boolean
         default: false
@@ -46,7 +46,7 @@ jobs:
         run: |
           echo "PLAYBOOK=${{github.event.inputs.playbook || env.DEFAULT_PLAYBOOK}}" >> $GITHUB_ENV
           echo "ENVIRONMENT=${{github.event.inputs.environment || env.DEFAULT_ENVIRONMENT}}" >> $GITHUB_ENV
-          echo "AWS_REGION=${{vars.aws_region || env.AWS_REGION}}" >> $GITHUB_ENV
+          echo "AWS_REGION=${{env.AWS_REGION}}" >> $GITHUB_ENV
           echo "SKIP_TAGS=${{github.event.inputs.skip_tags || env.DEFAULT_SKIP_TAGS}}" >> $GITHUB_ENV
           echo "DRY_RUN_MODE=${{github.event.inputs.dry_run_mode}}" >> $GITHUB_ENV
           if [ "${{github.event.inputs.dry_run_mode}}" = "true" ]; then
@@ -66,13 +66,13 @@ jobs:
           role-to-assume: ${{ env.ASSUME_ROLE }}
           role-session-name: github-actions-session
           aws-region: ${{ env.AWS_REGION }}
-      - name: Assume ggn-uki-${{ github.event.inputs.environment }} ansible role
+      - name: Assume ${{ github.event.inputs.environment }} ansible role
         uses: aws-actions/configure-aws-credentials@v4
         with:
           aws-access-key-id: ${{ env.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ env.AWS_SECRET_ACCESS_KEY }}
           aws-session-token: ${{ env.AWS_SESSION_TOKEN }}
-          aws-region: ${{ vars.AWS_REGION }}
+          aws-region: ${{ env.AWS_REGION }}
           role-duration-seconds: 3000
           role-skip-session-tagging: true
           role-to-assume: ${{ vars.role }}

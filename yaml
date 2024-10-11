@@ -1,0 +1,26 @@
+# demo.aws_ec2.yml
+plugin: amazon.aws.aws_ec2
+
+strict: false
+
+keyed_groups:
+  - key: tags.Role
+    prefix: role
+  - key: tags.Platform
+    prefix: platform
+
+regions:
+  - "us-east-1"
+
+hostnames:
+  - tag:Name
+
+allow_duplicated_hosts: false
+
+filters:
+  # get all running instances
+  instance-state-name: running
+  # tag:Role: ggn-cipwa
+
+compose:
+  ansible_host: instance_id

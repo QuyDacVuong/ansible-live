@@ -96,9 +96,6 @@ jobs:
       - name: Install boto3
         run: |
           pip3 install boto3
-      - name: Install Ansible
-        run: |
-          pip3 install ansible
       - name: List Inventory
         run: |
           ansible-inventory -i aws_ec2.yml --list

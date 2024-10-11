@@ -96,6 +96,9 @@ jobs:
       - name: Install boto3
         run: |
           pip3 install boto3
+      - name: Install Ansible
+        run: |
+          pip3 install ansible
       - name: Windows Playbook Run
         if: contains(fromJson('["hercules.yml","concentrator.yml","gdk_table_server.yml","non_gdk_table_server.yml","lobby.yml","oltp.yml","datafeedgateway.yml","telgateway.yml","windows.yml"]'), github.event.inputs.playbook )
         run: ansible-playbook playbooks/$PLAYBOOK -i windows_aws_ec2.yml -vv -e "env=$ENVIRONMENT region=${{ vars.AWS_REGION }} ansible_user=${{ secrets.SYSTEM_USER }} ansible_password=${{ secrets.SYSTEM_PWD }} artifactory_username=${{ secrets.ARTIFACTORY_USERNAME }} artifactory_password=${{ secrets.ARTIFACTORY_PASSWORD }} git_sha=${{ github.sha }}" --skip-tags="$SKIP_TAGS" $CHECK_OPT $DIFF_OPT

@@ -1,0 +1,114 @@
+---
+name: run an ansible playbook
+run-name: "run ${{ inputs.playbook }} in ${{ inputs.environment }}"
+permissions:
+  id-token: write # required to use OIDC authentication
+  contents: read # required to checkout the code from the repo
+  packages: read # required to pull the docker image
+
+on:
+  workflow_dispatch:
+    inputs:
+      playbook:
+        type: string
+        required: true
+        description: 'Playbook yml file to deploy'
+        default: cipwa.yml
+      environment:
+        type: choice
+        description: 'Select environment'
+        options:
+        - development
+        - qa1
+        - preprod
+        - prod
+      dry_run_mode:
+        type: boolean
+        default: false
+        description: Run in dry-run mode without making changes (--check --diff)
+      skip_tags:
+        type: string
+        required: false
+        default: 'launch'
+        description: 'Any tags to skip'
+
+env:
+  ANSIBLE_FORCE_COLOR: '1'
+  ASSUME_ROLE: "arn:aws:iam::882904394386:role/github-actions"
+  AWS_REGION: "eu-west-1"
+  DEFAULT_PLAYBOOK: "cipwa.yml"
+  DEFAULT_ENVIRONMENT: "development"
+  DEFAULT_SKIP_TAGS: ""
+
+jobs:
+  ansible-playbook:
+    environment: ${{ github.event.inputs.environment }}
+    runs-on: ${{github.event.inputs.environment}}-runner
+    container:
+      image: ghcr.io/flutterint/fips-casino-ansible-ee:latest
+      options: --user root
+    steps:
+      - name: Set the variables
+        run: |
+          echo "PLAYBOOK=${{github.event.inputs.playbook || env.DEFAULT_PLAYBOOK}}" >> $GITHUB_ENV
+          echo "ENVIRONMENT=${{github.event.inputs.environment || env.DEFAULT_ENVIRONMENT}}" >> $GITHUB_ENV
+          echo "AWS_REGION=${{vars.aws_region || env.AWS_REGION}}" >> $GITHUB_ENV
+          echo "SKIP_TAGS=${{github.event.inputs.skip_tags || env.DEFAULT_SKIP_TAGS}}" >> $GITHUB_ENV
+          echo "DRY_RUN_MODE=${{github.event.inputs.dry_run_mode}}" >> $GITHUB_ENV
+          if [ "${{github.event.inputs.dry_run_mode}}" = "true" ]; then
+            echo "CHECK_OPT=--check" >> $GITHUB_ENV
+            echo "DIFF_OPT=--diff" >> $GITHUB_ENV
+          fi
+      - name: Set summary
+        run: |
+          echo "### :rocket: deploying $PLAYBOOK to $ENVIRONMENT" >> $GITHUB_STEP_SUMMARY
+          echo "DRY_RUN_MODE=$DRY_RUN_MODE" >> $GITHUB_STEP_SUMMARY
+          echo "SKIP_TAGS=$SKIP_TAGS" >> $GITHUB_STEP_SUMMARY
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: ${{ env.ASSUME_ROLE }}
+          role-session-name: github-actions-session
+          aws-region: ${{ env.AWS_REGION }}
+      - name: Assume ggn-uki-${{ github.event.inputs.environment }} ansible role
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ env.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ env.AWS_SECRET_ACCESS_KEY }}
+          aws-session-token: ${{ env.AWS_SESSION_TOKEN }}
+          aws-region: ${{ vars.AWS_REGION }}
+          role-duration-seconds: 3000
+          role-skip-session-tagging: true
+          role-to-assume: ${{ vars.role }}
+      - name: Get Token
+        id: get_workflow_token
+        uses: peter-murray/workflow-application-token-action@v3
+        with:
+          application_id: ${{ vars.GH_APP_ID }}
+          application_private_key: ${{ secrets.GH_APPLICATION_KEY }}
+          permissions: "contents:read"
+      - name: Install dependencies
+        env:
+          GH_TOKEN: ${{ steps.get_workflow_token.outputs.token }}
+        run: |
+          echo "machine github.com login gh_app password $GH_TOKEN" >> ~/.netrc
+          ansible-galaxy install -f -r requirements.yml
+      - name: Windows Playbook Run
+        if: contains(fromJson('["hercules.yml","concentrator.yml","gdk_table_server.yml","non_gdk_table_server.yml","lobby.yml","oltp.yml","datafeedgateway.yml","telgateway.yml","windows.yml"]'), github.event.inputs.playbook )
+        run: ansible-playbook playbooks/$PLAYBOOK -i windows_aws_ec2.yml -vv -e "env=$ENVIRONMENT region=${{ vars.AWS_REGION }} ansible_user=${{ secrets.SYSTEM_USER }} ansible_password=${{ secrets.SYSTEM_PWD }} artifactory_username=${{ secrets.ARTIFACTORY_USERNAME }} artifactory_password=${{ secrets.ARTIFACTORY_PASSWORD }} git_sha=${{ github.sha }}" --skip-tags="$SKIP_TAGS" $CHECK_OPT $DIFF_OPT
+      - name: Linux Playbook Run
+        if: contains(fromJson('["db2.yml","cipwa.yml","entropy.yml","ggndemobackoffice.yml","ppbintegration.yml","sbgintegration.yml","linux.yml"]'), github.event.inputs.playbook )
+        run: ansible-playbook playbooks/$PLAYBOOK -i aws_ec2.yml -vv -e "env=$ENVIRONMENT region=${{ vars.AWS_REGION }} artifactory_username=${{ secrets.ARTIFACTORY_USERNAME }} artifactory_password=${{ secrets.ARTIFACTORY_PASSWORD }} git_sha=${{ github.sha }}" --skip-tags="$SKIP_TAGS" $CHECK_OPT $DIFF_OPT
+      - name: Slack Workflow Notification
+        if: always() && github.event.inputs.dry_run_mode != 'true'
+        uses: rtCamp/action-slack-notify@v2
+        env:
+          SLACK_CHANNEL: fs-gh-build-alerts
+          SLACK_COLOR: ${{ job.status }}
+          SLACK_USERNAME: 'Github Workflow Alert'
+          SLACK_ICON: https://github.com/ansible/logos/blob/main/galaxy/galaxy-icon.png
+          SLACK_MESSAGE: ':rocket: Deploying ${{ github.event.inputs.playbook }} to ${{ github.event.inputs.environment }} on region=${{ vars.AWS_REGION }} has ${{ job.status }}'
+          SLACK_TITLE: Details
+          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}

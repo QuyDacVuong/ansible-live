@@ -1,13 +1,14 @@
+---
 # demo.aws_ec2.yml
 plugin: amazon.aws.aws_ec2
 
 strict: False
 
 keyed_groups:
-- key: tags.Role
-  prefix: role
-- key: tags.Platform
-  prefix: platform
+  - key: tags.Role
+    prefix: role
+  - key: tags.Platform
+    prefix: platform
 
 # This sets the region. If empty (the default) default this will include all regions, except possibly
 # restricted ones like us-gov-west-1 and cn-north-1.
@@ -25,4 +26,4 @@ filters:
   # tag:Role: ggn-cipwa
 
 compose:
- ansible_host: instance_id
+  ansible_host: instance_id

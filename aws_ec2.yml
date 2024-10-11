@@ -3,5 +3,24 @@ plugin: amazon.aws.aws_ec2
 
 strict: false
 
+keyed_groups:
+  - key: tags.Role
+    prefix: role
+  - key: tags.Platform
+    prefix: platform
+
 regions:
   - "us-east-1"
+
+hostnames:
+  - tag:Name
+
+allow_duplicated_hosts: false
+
+filters:
+  instance-state-name: running
+  
+compose:
+  ansible_host: public_ip_address
+  ansible_user: "ec2-user"
+  ansible_ssh_private_key_file: /Users/quy/.ssh/ncs-key.pem

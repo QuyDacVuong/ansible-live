@@ -40,6 +40,7 @@ env:
 jobs:
   ansible-playbook:
     environment: ${{ github.event.inputs.environment }}
+    runs-on: ubuntu-latest
     steps:
       - name: Set the variables
         run: |

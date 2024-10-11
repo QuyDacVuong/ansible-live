@@ -31,7 +31,7 @@ on:
 
 env:
   ANSIBLE_FORCE_COLOR: '1'
-  ASSUME_ROLE: "arn:aws:iam::727646479515:role/github-actions-oidc-Role-37LIT4XwPUFo"
+  ASSUME_ROLE: "arn:aws:iam::727646479515:role/github-actions-terraform"
   AWS_REGION: "us-east-1"
   DEFAULT_PLAYBOOK: "cipwa.yml"
   DEFAULT_ENVIRONMENT: "development"

@@ -90,7 +90,7 @@ jobs:
           echo "machine github.com login gh_app password $GH_TOKEN" >> ~/.netrc
           ansible-galaxy install -f -r requirements.yml
       - name: Setup Python
-        uses: actions/setup-python@v4
+        uses: actions/setup-python@v3
         with:
           python-version: 3.10
       - name: Install boto3

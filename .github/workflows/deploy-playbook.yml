@@ -103,7 +103,7 @@ jobs:
           mkdir -p ~/.ssh
           echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/ncs-key.pem
           chmod 600 ~/.ssh/ncs-key.pem
-          aws ec2 describe-instances --query "Reservations[].Instances[].PublicDnsName
+          aws ec2 describe-instances --query "Reservations[].Instances[].PublicDnsName"
           INSTANCES=$(aws ec2 describe-instances --query "Reservations[].Instances[].PublicDnsName")
           for INSTANCE in INSTANCES
           do

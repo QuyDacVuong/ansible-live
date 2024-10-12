@@ -117,7 +117,7 @@ jobs:
           for INSTANCE in $INSTANCES
           do
             ssh-keyscan -H $INSTANCE >> ~/.ssh/known_hosts
-            sh -i ~/.ssh/ncs-key.pem -o StrictHostKeyChecking=no ec2-user@$INSTANCE echo "SSH connection successful"
+            ssh -i ~/.ssh/ncs-key.pem -o StrictHostKeyChecking=no ec2-user@$INSTANCE echo "SSH connection successful"
           done
           chmod 644 ~/.ssh/known_hosts
 

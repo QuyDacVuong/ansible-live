@@ -53,19 +53,23 @@ jobs:
             echo "CHECK_OPT=--check" >> $GITHUB_ENV
             echo "DIFF_OPT=--diff" >> $GITHUB_ENV
           fi
+
       - name: Set summary
         run: |
           echo "### :rocket: deploying $PLAYBOOK to $ENVIRONMENT" >> $GITHUB_STEP_SUMMARY
           echo "DRY_RUN_MODE=$DRY_RUN_MODE" >> $GITHUB_STEP_SUMMARY
           echo "SKIP_TAGS=$SKIP_TAGS" >> $GITHUB_STEP_SUMMARY
+
       - name: Checkout
         uses: actions/checkout@v4
+
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v4
         with:
           role-to-assume: ${{ env.ASSUME_ROLE }}
           role-session-name: github-actions-session
           aws-region: ${{ env.AWS_REGION }}
+
       - name: Assume ${{ github.event.inputs.environment }} ansible role
         uses: aws-actions/configure-aws-credentials@v4
         with:
@@ -76,6 +80,7 @@ jobs:
           role-duration-seconds: 3000
           role-skip-session-tagging: true
           role-to-assume: ${{ vars.role }}
+
       - name: Get Token
         id: get_workflow_token
         uses: peter-murray/workflow-application-token-action@v3
@@ -83,10 +88,12 @@ jobs:
           application_id: ${{ vars.GH_APP_ID }}
           application_private_key: ${{ secrets.GH_APPLICATION_KEY }}
           permissions: "contents:read"
+
       - name: Setup Python
         uses: actions/setup-python@v3
         with:
           python-version: 3.13.0
+
       - name: Install dependencies
         env:
           GH_TOKEN: ${{ steps.get_workflow_token.outputs.token }}
@@ -95,9 +102,11 @@ jobs:
           python3 -m pip install --upgrade pip
           pip install ansible boto3 botocore
           ansible-galaxy install -f -r requirements.yml
+
       - name: List Inventory
         run: |
           ansible-inventory -i aws_ec2.yml --list -vvv
+
       - name: Obtain pem file
         run: |
           mkdir -p ~/.ssh
@@ -108,16 +117,18 @@ jobs:
           for INSTANCE in $INSTANCES
           do
             ssh-keyscan -H $INSTANCE >> ~/.ssh/known_hosts
+            sh -i ~/.ssh/ncs-key.pem -o StrictHostKeyChecking=no ec2-user@$INSTANCE echo "SSH connection successful"
           done
           chmod 644 ~/.ssh/known_hosts
-          ssh -i ~/.ssh/ncs-key.pem -o StrictHostKeyChecking=no ec2-user@ec2-3-236-200-105.compute-1.amazonaws.com echo "SSH connection successful"
-          ssh -i ~/.ssh/ncs-key.pem -o StrictHostKeyChecking=no ec2-user@ec2-54-197-211-80.compute-1.amazonaws.com echo "SSH connection successful"
+
       - name: Windows Playbook Run
         if: contains(fromJson('["hercules.yml","concentrator.yml","gdk_table_server.yml","non_gdk_table_server.yml","lobby.yml","oltp.yml","datafeedgateway.yml","telgateway.yml","windows.yml"]'), github.event.inputs.playbook )
         run: ansible-playbook playbooks/$PLAYBOOK -i windows_aws_ec2.yml -vv -e "env=$ENVIRONMENT region=${{ vars.AWS_REGION }} ansible_user=${{ secrets.SYSTEM_USER }} ansible_password=${{ secrets.SYSTEM_PWD }} artifactory_username=${{ secrets.ARTIFACTORY_USERNAME }} artifactory_password=${{ secrets.ARTIFACTORY_PASSWORD }} git_sha=${{ github.sha }}" --skip-tags="$SKIP_TAGS" $CHECK_OPT $DIFF_OPT
+
       - name: Linux Playbook Run
         if: contains(fromJson('["db2.yml","cipwa.yml","entropy.yml","ggndemobackoffice.yml","ppbintegration.yml","sbgintegration.yml","linux.yml"]'), github.event.inputs.playbook )
         run: ansible-playbook playbooks/$PLAYBOOK -i aws_ec2.yml -u ec2-user --private-key ~/.ssh/ncs-key.pem --become --become-user root -vvv
+
       - name: Slack Workflow Notification
         if: always() && github.event.inputs.dry_run_mode != 'true'
         uses: rtCamp/action-slack-notify@v2

@@ -106,7 +106,7 @@ jobs:
         run: |
           echo ${{ secrets.SSH_PRIVATE_KEY }} > ~/ncs-key.pem
           chmod 400 ~/ncs-key.pem
-          ansible-playbook playbooks/$PLAYBOOK -i aws_ec2.yml -u ec2-user --private-key ~/ncs-key.pem --become --become-user root -vvv --skip-tags="$SKIP_TAGS" $CHECK_OPT $DIFF_OPT
+          ansible-playbook playbooks/$PLAYBOOK -i aws_ec2.yml -u ec2-user --private-key ~/ncs-key.pem --become --become-user root -vvv
       - name: Slack Workflow Notification
         if: always() && github.event.inputs.dry_run_mode != 'true'
         uses: rtCamp/action-slack-notify@v2

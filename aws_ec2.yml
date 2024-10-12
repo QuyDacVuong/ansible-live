@@ -3,23 +3,23 @@ plugin: amazon.aws.aws_ec2
 
 strict: false
 
+regions:
+  - "us-east-1"
+
 keyed_groups:
   - key: tags.Role
     prefix: role
   - key: tags.Platform
     prefix: platform
 
-regions:
-  - "us-east-1"
-
 hostnames:
-  - tag:Name
+  - dns-name
 
-allow_duplicated_hosts: false
+allow_duplicated_hosts: true
 
 filters:
   instance-state-name: running
-  
+
 compose:
   ansible_host: public_ip_address
   ansible_user: "ec2-user"

@@ -83,19 +83,18 @@ jobs:
           application_id: ${{ vars.GH_APP_ID }}
           application_private_key: ${{ secrets.GH_APPLICATION_KEY }}
           permissions: "contents:read"
+      - name: Setup Python
+        uses: actions/setup-python@v3
+        with:
+          python-version: 3.13.0
       - name: Install dependencies
         env:
           GH_TOKEN: ${{ steps.get_workflow_token.outputs.token }}
         run: |
           echo "machine github.com login gh_app password $GH_TOKEN" >> ~/.netrc
+          python3 -m pip install --upgrade pip
+          pip install ansible boto3 botocore
           ansible-galaxy install -f -r requirements.yml
-      - name: Setup Python
-        uses: actions/setup-python@v3
-        with:
-          python-version: 3.13.0
-      - name: Install boto3
-        run: |
-          pip3 install boto3
       - name: List Inventory
         run: |
           ansible-inventory -i aws_ec2.yml --list -vvv

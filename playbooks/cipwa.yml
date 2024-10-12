@@ -4,7 +4,6 @@
   roles:
     - casino.server.chrony
     - casino.server.common
-    - casino.server.generate_certs
     - name: casino.server.cipwa
       role: casino.server.cipwa
       vars:

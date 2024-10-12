@@ -105,6 +105,7 @@ jobs:
         if: contains(fromJson('["db2.yml","cipwa.yml","entropy.yml","ggndemobackoffice.yml","ppbintegration.yml","sbgintegration.yml","linux.yml"]'), github.event.inputs.playbook )
         run: |
           echo ${{ secrets.SSH_PRIVATE_KEY }} > ~/ncs-key.pem
+          chmod 400 ~/ncs-key.pem
           ansible-playbook playbooks/$PLAYBOOK -i aws_ec2.yml -u ec2-user --private-key ~/ncs-key.pem --become --become-user root -vvv --skip-tags="$SKIP_TAGS" $CHECK_OPT $DIFF_OPT
       - name: Slack Workflow Notification
         if: always() && github.event.inputs.dry_run_mode != 'true'

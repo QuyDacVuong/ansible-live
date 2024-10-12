@@ -100,14 +100,22 @@ jobs:
           ansible-inventory -i aws_ec2.yml --list -vvv
       - name: Obtain pem file
         run: |
-          echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/ncs-key.pem
-          chmod 600 ~/ncs-key.pem
+          mkdir -p ~/.ssh
+          echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/ncs-key.pem
+          chmod 600 ~/.ssh/ncs-key.pem
+          touch ~/.ssh/known_hosts
+          INSTANCES=$(aws ec2 describe-instances --query "Reservations[].Instances[].PublicDnsName")
+          for INSTANCE in INSTANCES
+          do
+            ssh-keyscan -H $INSTANCE >> ~/.ssh/known_hosts
+          done
+          chmod 644 ~/.ssh/known_hosts
       - name: Windows Playbook Run
         if: contains(fromJson('["hercules.yml","concentrator.yml","gdk_table_server.yml","non_gdk_table_server.yml","lobby.yml","oltp.yml","datafeedgateway.yml","telgateway.yml","windows.yml"]'), github.event.inputs.playbook )
         run: ansible-playbook playbooks/$PLAYBOOK -i windows_aws_ec2.yml -vv -e "env=$ENVIRONMENT region=${{ vars.AWS_REGION }} ansible_user=${{ secrets.SYSTEM_USER }} ansible_password=${{ secrets.SYSTEM_PWD }} artifactory_username=${{ secrets.ARTIFACTORY_USERNAME }} artifactory_password=${{ secrets.ARTIFACTORY_PASSWORD }} git_sha=${{ github.sha }}" --skip-tags="$SKIP_TAGS" $CHECK_OPT $DIFF_OPT
       - name: Linux Playbook Run
         if: contains(fromJson('["db2.yml","cipwa.yml","entropy.yml","ggndemobackoffice.yml","ppbintegration.yml","sbgintegration.yml","linux.yml"]'), github.event.inputs.playbook )
-        run: ansible-playbook playbooks/$PLAYBOOK -i aws_ec2.yml -u ec2-user --private-key ~/ncs-key.pem --become --become-user root -vvv
+        run: ansible-playbook playbooks/$PLAYBOOK -i aws_ec2.yml -u ec2-user --private-key ~/.ssh/ncs-key.pem --become --become-user root -vvv
       - name: Slack Workflow Notification
         if: always() && github.event.inputs.dry_run_mode != 'true'
         uses: rtCamp/action-slack-notify@v2

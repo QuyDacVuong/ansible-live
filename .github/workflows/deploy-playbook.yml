@@ -105,7 +105,7 @@ jobs:
           chmod 600 ~/.ssh/ncs-key.pem
           aws ec2 describe-instances --query "Reservations[].Instances[].PublicDnsName"
           INSTANCES=$(aws ec2 describe-instances --query "Reservations[].Instances[].PublicDnsName")
-          for INSTANCE in INSTANCES
+          for INSTANCE in $INSTANCES
           do
             ssh-keyscan -H $INSTANCE >> ~/.ssh/known_hosts
           done

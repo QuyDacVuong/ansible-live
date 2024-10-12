@@ -103,7 +103,9 @@ jobs:
         run: ansible-playbook playbooks/$PLAYBOOK -i windows_aws_ec2.yml -vv -e "env=$ENVIRONMENT region=${{ vars.AWS_REGION }} ansible_user=${{ secrets.SYSTEM_USER }} ansible_password=${{ secrets.SYSTEM_PWD }} artifactory_username=${{ secrets.ARTIFACTORY_USERNAME }} artifactory_password=${{ secrets.ARTIFACTORY_PASSWORD }} git_sha=${{ github.sha }}" --skip-tags="$SKIP_TAGS" $CHECK_OPT $DIFF_OPT
       - name: Linux Playbook Run
         if: contains(fromJson('["db2.yml","cipwa.yml","entropy.yml","ggndemobackoffice.yml","ppbintegration.yml","sbgintegration.yml","linux.yml"]'), github.event.inputs.playbook )
-        run: ansible-playbook playbooks/$PLAYBOOK -i aws_ec2.yml -vv -e "env=$ENVIRONMENT region=${{ vars.AWS_REGION }} artifactory_username=${{ secrets.ARTIFACTORY_USERNAME }} artifactory_password=${{ secrets.ARTIFACTORY_PASSWORD }} git_sha=${{ github.sha }}" --skip-tags="$SKIP_TAGS" $CHECK_OPT $DIFF_OPT
+        run: |
+          echo ${{ secrets.SSH_PRIVATE_KEY }} > ncs-key.pem
+          ansible-playbook playbooks/$PLAYBOOK -i aws_ec2.yml -u ec2-user --private-key ncs-key.pem --become --become-user root -vvv --skip-tags="$SKIP_TAGS" $CHECK_OPT $DIFF_OPT
       - name: Slack Workflow Notification
         if: always() && github.event.inputs.dry_run_mode != 'true'
         uses: rtCamp/action-slack-notify@v2

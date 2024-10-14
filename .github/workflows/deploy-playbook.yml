@@ -127,7 +127,7 @@ jobs:
 
       - name: Linux Playbook Run
         if: contains(fromJson('["db2.yml","cipwa.yml","entropy.yml","ggndemobackoffice.yml","ppbintegration.yml","sbgintegration.yml","linux.yml"]'), github.event.inputs.playbook )
-        run: ansible-playbook playbooks/$PLAYBOOK -i aws_ec2.yml -u ec2-user --private-key ~/.ssh/ncs-key.pem --become --become-user root -e "ansible_ssh_common_args='-o UserKnownHostsFile=~/.ssh/known_hosts'" -vvvv
+        run: ansible-playbook playbooks/$PLAYBOOK -i aws_ec2.yml -u ec2-user --private-key ~/.ssh/ncs-key.pem --become --become-user root -e "ansible_ssh_common_args='-o StrictHostKeyChecking=accept-new -o UserKnownHostsFile=~/.ssh/known_hosts'" -vvvv
 
       - name: Slack Workflow Notification
         if: always() && github.event.inputs.dry_run_mode != 'true'
